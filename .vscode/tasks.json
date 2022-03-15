@@ -2,7 +2,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "build",
+            "label": "Build",
             "command": "dotnet",
             "type": "process",
             "args": [
@@ -14,6 +14,28 @@
                 "Debug"
             ],
             "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Publish",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "command": "cmd /c publish.bat ${input:param1}",
+            "problemMatcher": []
         }
+    ],
+    "inputs": [
+        {
+            "id": "param1",
+            "description": "Choose a version that will reflect the current build.",
+            "default": "Patch",
+            "type": "pickString",
+            "options": [
+                "Major",
+                "Minor",
+                "Patch"
+            ]
+        },
     ]
 }

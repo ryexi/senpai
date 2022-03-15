@@ -15,7 +15,7 @@
     <!-- For more information, see https://docs.microsoft.com/en-us/nuget/reference/msbuild-targets#pack-target -->
     <PackageId>Senpai</PackageId>
     <Authors>$(Company)</Authors>
-    <Version></Version>
+    <Version>$([System.IO.File]::ReadAllText(".\.version"))</Version>
     <Description>A command handler for cli applications.</Description>
     <RepositoryUrl>https://github.com/imdying/senpai</RepositoryUrl>
     <PackageReadmeFile>\README.md</PackageReadmeFile>
@@ -25,6 +25,8 @@
 
     <!-- Assembly properties -->
     <Company>Blank</Company>
+    <FileVersion>$(Version)</FileVersion>
+    <AssemblyVersion>$(Version)</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
