@@ -17,11 +17,11 @@ public class Test
 
         // Method2: Some complex shits.
         //// Cli.Initialize(new string[] { "update", "20", "22" });
-        Cli.Initialize(new string[] { "update", "20", "", "true", "1000" });
+        //// Cli.Initialize(new string[] { "update", "20", "", "true", "1000" });
         //// Cli.Initialize(new string[] { "update", "20", "" });
 
         // Method2: Requesting usage
-        //// Cli.Initialize(new string[] { "update", "--help" });
+        Cli.Initialize(new string[] { "update", "--help" });
     }
 
     [Command("Test")]

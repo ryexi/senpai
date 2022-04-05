@@ -1,4 +1,7 @@
+using System.Diagnostics;
 using System.Reflection;
+using System.Runtime.ExceptionServices;
+
 namespace Senpai.Core;
 
 internal static partial class Handler
@@ -68,21 +71,35 @@ internal static partial class Handler
         }
         #endregion
 
-        #region Execution
+        Execute(
+            Current
+        );
+    }
+
+    private static void Execute(ActualCommand cmd)
+    {
         try
         {
-            var Method = Current.Method;
-            var Parameters = Current.Parameters = Parameter.Build(Method);
+            var Method = cmd.Method;
+            var Parameters = cmd.Parameters = Parameter.Build(Method);
 
-            Method.Invoke(null, Parameters);
+            Method.Invoke(null,
+                          Parameters);
+        }
+        catch (TargetInvocationException e)
+        {
+            if (Debugger.IsAttached)
+                // https://berserkerdotnet.github.io/blog/rethrow-exception-correctly-in-dotnet/
+                ExceptionDispatchInfo.Capture(e.InnerException ?? e).Throw();
+            else
+                Helper.Critical((e.InnerException ?? e).ToString());
         }
         catch (Exception e)
         {
-            Helper.Critical(
-                e.ToString()
-            );
+            if (!Debugger.IsAttached)
+                Helper.Critical(e.ToString());
+            throw;
         }
-        #endregion
     }
 
     private static Command? GetAttribute(MethodInfo method)

@@ -41,21 +41,21 @@ dotnet pack "%directory%Senpai.csproj" -c "Release" -o "%nuget%"
 exit
 
 :Major
-    set /a var = %1 + 1
-    set /a min = 0
-    set /a pat = 0
-    set "version=%var%.%min%.%pat%"
+    set /a a = %1 + 1
+    set /a b = 0
+    set /a c = 0
+    set "version=%a%.%b%.%c%"
     exit /b
 
 :Minor
-    set /a var = %2 + 1
-    set /a pat = 0
-    set "version=%1.%var%.%pat%"
+    set /a b = %2 + 1
+    set /a c = 0
+    set "version=%1.%b%.%c%"
     exit /b
 
 :Patch
-    set /a var = %3 + 1
-    set "version=%1.%2.%var%"
+    set /a c = %3 + 1
+    set "version=%1.%2.%c%"
     exit /b
 
 :throw

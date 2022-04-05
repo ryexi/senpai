@@ -1,3 +1,4 @@
+using System.Text;
 namespace Senpai.Core;
 
 internal static partial class Handler
@@ -21,8 +22,11 @@ internal static partial class Handler
 
                 for (int i = 0; i < parameters.Length; i++)
                 {
-                    // output += $"<{parameters[i].ParameterType} arg{i}> ";
-                    output += $"[arg{i + 1}] ";
+                    var name = GetName(parameters[i].Name);
+                    var typeName = GetTypeName(parameters[i].ParameterType);
+
+                    // output += $"[arg{i + 1}] ";
+                    output += $"[{name}: {typeName}] ";
                 }
 
                 Console.WriteLine(
@@ -30,6 +34,29 @@ internal static partial class Handler
                 );
 
                 Helper.ExitIf(exit);
+            }
+
+            static string GetName(string? name)
+            {
+                // Obfuscation issues?
+                if (string.IsNullOrWhiteSpace(name) || 
+                    Encoding.ASCII.GetString(Encoding.ASCII.GetBytes(name)).Contains("?"))
+                    return "arg";
+                else
+                    return name;
+            }
+
+            static string GetTypeName(Type type)
+            {
+                if (Nullable.GetUnderlyingType(type) != null)
+                    return GetUnderlyingType(type);
+                else
+                    return type.Name;
+            }
+
+            static string GetUnderlyingType(Type type)
+            {
+                return Nullable.GetUnderlyingType(type)?.Name ?? type.Name;
             }
         }
     }
