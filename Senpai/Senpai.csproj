@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <RootNamespace>Senpai</RootNamespace>
     <AssemblyName>senpai</AssemblyName>
+    <RootNamespace>Senpai</RootNamespace>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
@@ -16,7 +16,7 @@
     <PackageId>Senpai</PackageId>
     <Authors>$(Company)</Authors>
     <Version>$([System.IO.File]::ReadAllText(".\.version"))</Version>
-    <Description>A command handler for cli applications.</Description>
+    <Description>A simple command handler for cli applications.</Description>
     <RepositoryUrl>https://github.com/imdying/senpai</RepositoryUrl>
     <PackageReadmeFile>\README.md</PackageReadmeFile>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -27,6 +27,7 @@
     <Company>Blank</Company>
     <FileVersion>$(Version)</FileVersion>
     <AssemblyVersion>$(Version)</AssemblyVersion>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

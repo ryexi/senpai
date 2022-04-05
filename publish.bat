@@ -11,7 +11,7 @@ if [%1] == [] (
 if not %1 == Major (
     if not %1 == Minor (
         if not %1 == Patch (
-            call :throw "The parameter `'%~1`' is either in lowercase or doesn`'t match the SemVer format."
+            call :throw "The parameter `'%~1`' is invalid."
         )
     )
 )
@@ -35,22 +35,22 @@ call :echo "Upgrading from `'%previous%`' to `'%version%`'" "Magenta"
 
 :: https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-pack
 :: https://docs.microsoft.com/en-us/nuget/quickstart/create-and-publish-a-package-using-the-dotnet-cli
-dotnet pack "%directory%Senpai.csproj" -c "Release" -o "%directory%bin/Nuget"
+set "nuget=%directory%bin/Release/net6.0/publish"
+dotnet pack "%directory%Senpai.csproj" -c "Release" -o "%nuget%"
 :: dotnet nuget push 
 exit
 
-
 :Major
     set /a var = %1 + 1
-    set /a %2 = 0
-    set /a %3 = 0
-    set "version=%var%.%2.%3"
+    set /a min = 0
+    set /a pat = 0
+    set "version=%var%.%min%.%pat%"
     exit /b
 
 :Minor
     set /a var = %2 + 1
-    set /a %3 = 0
-    set "version=%1.%var%.%3"
+    set /a pat = 0
+    set "version=%1.%var%.%pat%"
     exit /b
 
 :Patch
