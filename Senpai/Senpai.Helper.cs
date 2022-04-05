@@ -1,6 +1,6 @@
 namespace Senpai;
 
-internal static class Output
+internal static class Helper
 {
     public static void ExitIf(bool condition, int code = 0)
     {

@@ -3,12 +3,6 @@ namespace Senpai.Core;
 
 internal static partial class Handler
 {
-    public static string? Default
-    {
-        get;
-        set;
-    }
-
     public static Assembly? Caller
     {
         get;
@@ -33,7 +27,7 @@ internal static partial class Handler
 
         if (args.Length == 0)
         {
-            Welcome.Display();
+            Output.Default.Display();
             return;
         }
 
@@ -50,13 +44,13 @@ internal static partial class Handler
                    Arguments.Length);
 
         #region Searching
-        var HasFlag = Help.HasFlag(args);
+        var HasFlag = Output.Help.HasFlag(args);
 
         if (ValidateCommand(args[0], ref RawCommands, out Current))
         {
             if (HasFlag)
             {
-                Usage.Display(Current, true);
+                Output.Usage.Display(Current, true);
                 return;
             }
         }
@@ -68,7 +62,7 @@ internal static partial class Handler
             }
             else
             {
-                Help.Display();
+                Output.Help.Display();
                 return;
             }
         }
@@ -84,7 +78,7 @@ internal static partial class Handler
         }
         catch (Exception e)
         {
-            Output.Critical(
+            Helper.Critical(
                 e.ToString()
             );
         }

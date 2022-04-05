@@ -3,18 +3,11 @@ namespace Senpai.Core;
 
 internal static partial class Handler
 {
+    /// <summary>
+    /// The parameter builder/handler.
+    /// </summary>
     internal static partial class Parameter
     {
-        static bool IsInt(Type type) => type == typeof(int) || IsNullable(type);
-
-        static bool IsDouble(Type type) => type == typeof(double) || IsNullable(type);
-
-        static bool IsString(Type type) => type == typeof(string);
-
-        static bool IsNullable(Type type) => Nullable.GetUnderlyingType(type) != null;
-
-        static bool IsSupported(Type type) => IsString(type) || IsInt(type) || IsDouble(type);
-
         // Todo Probably fix this
         public static object?[]? Build(MethodInfo method)
         {
@@ -58,26 +51,59 @@ internal static partial class Handler
                     }
                 }
 
-                if (IsString(ptype))
+                if (IsType<string>(ptype))
                 {
                     result[i] = Arguments[i];
                     continue;
                 }
 
-                if (IsInt(ptype))
+                if (IsType<char>(ptype))
                 {
                     result[i] = Converter.ToInt(Arguments[i], i + 1);
                     continue;
                 }
 
-                if (IsDouble(ptype))
+                if (IsType<int>(ptype))
+                {
+                    result[i] = Converter.ToInt(Arguments[i], i + 1);
+                    continue;
+                }
+
+                if (IsType<long>(ptype))
+                {
+                    result[i] = Converter.ToInt(Arguments[i], i + 1);
+                    continue;
+                }
+
+                if (IsType<double>(ptype))
                 {
                     result[i] = Converter.ToDouble(Arguments[i], i + 1);
+                    continue;
+                }
+
+                if (IsType<bool>(ptype))
+                {
+                    result[i] = Converter.ToBoolean(Arguments[i], i + 1);
                     continue;
                 }
             }
 
             return result;
+        }
+
+        static bool IsType<T>(Type type)
+        {
+            return type == typeof(T) || Nullable.GetUnderlyingType(type) == typeof(T);
+        }
+
+        static bool IsNullable(Type type)
+        {
+            return Nullable.GetUnderlyingType(type) != null;
+        }
+
+        static bool IsSupported(Type type)
+        {
+            return IsType<string>(type) || IsType<int>(type) || IsType<double>(type) || IsType<bool>(type) || IsType<char>(type) || IsType<long>(type);
         }
     }
 }

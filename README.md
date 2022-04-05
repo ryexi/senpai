@@ -37,8 +37,11 @@ public static void myMethod(int a, string? b, string c = null)
 
 ## Supported Parameter Type
 1. Int
-2. String
-3. Double
+2. Char
+3. Long
+4. String
+5. Double
+6. Boolean
 
 And nullable of mentioned types.
 

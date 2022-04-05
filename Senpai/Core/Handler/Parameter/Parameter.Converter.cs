@@ -6,32 +6,42 @@ internal static partial class Handler
     {
         internal static class Converter
         {
+            private static string ExceptionMessage(string value, int index) => $"'{value}' is not a valid value at [arg{index}].";
+
+            public static char ToChar(string value, int pos)
+            {
+                char output;
+                return char.TryParse(value, out output) ? output : throw new Senption(ExceptionMessage(value, pos), true);
+            }
+            
             public static int ToInt(string value, int pos)
             {
                 int output;
-                var result = int.TryParse(value, out output);
-                if (result)
-                    return output;
-                else
-                    throw new Senption($"'{value}' is not a valid value (arg{pos}).", true);
+                return int.TryParse(value, out output) ? output : throw new Senption(ExceptionMessage(value, pos), true);
             }
 
-            /*
-            public static T To<T>(T value)
+            public static long ToLong(string value, int pos)
             {
-                T output;
-
+                long output;
+                return long.TryParse(value, out output) ? output : throw new Senption(ExceptionMessage(value, pos), true);
             }
-            */
 
             public static double ToDouble(string value, int pos)
             {
                 double output;
-                var result = double.TryParse(value, out output);
-                if (result)
-                    return output;
-                else
-                    throw new Senption($"'{value}' is not a valid value (arg{pos}).", true);
+                return double.TryParse(value, out output) ? output : throw new Senption(ExceptionMessage(value, pos), true);
+            }
+
+            public static bool ToBoolean(string value, int pos)
+            {
+                try
+                {
+                    return Convert.ToBoolean(value);
+                }
+                catch (FormatException)
+                {
+                    throw new Senption(ExceptionMessage(value, pos), true);
+                }
             }
         }
     }

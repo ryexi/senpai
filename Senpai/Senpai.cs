@@ -28,5 +28,5 @@ public static class Cli
     /// <summary>
     /// Override the string that gets printed when no input is given.
     /// </summary>
-    public static void OverrideDefaultBehavior(string str) => Handler.Default = str;
+    public static void OverrideDefaultBehavior(string str) => Handler.Output.Default.Buffer = str;
 }
