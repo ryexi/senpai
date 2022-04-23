@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/Senpai/Senpai.csproj",
+                "${workspaceFolder}/src/Senpai/Senpai.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary",
                 "--configuration",
@@ -21,21 +21,8 @@
             "options": {
                 "cwd": "${workspaceFolder}"
             },
-            "command": "cmd /c publish.bat ${input:param1}",
-            "problemMatcher": []
+            "command": "cmd /c build.bat 3",
+            "problemMatcher": "$msCompile"
         }
-    ],
-    "inputs": [
-        {
-            "id": "param1",
-            "description": "Choose a version that will reflect the current build.",
-            "default": "Patch",
-            "type": "pickString",
-            "options": [
-                "Major",
-                "Minor",
-                "Patch"
-            ]
-        },
     ]
 }
