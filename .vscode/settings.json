@@ -3,6 +3,5 @@
         "**/bin": true,
         "**/obj": true
     },
-    "csharpextensions.useFileScopedNamespace": true,
-    "dotnet-test-explorer.testProjectPath": "**\\src\\Unit.@(csproj|vbproj|fsproj)"
+    "csharpextensions.useFileScopedNamespace": true
 }

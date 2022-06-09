@@ -1,11 +1,10 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Senpai", "src\Senpai\Senpai.csproj", "{64940F5E-0277-440A-85D3-FDCF5F69B64E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Senpai", "src\Senpai.csproj", "{64940F5E-0277-440A-85D3-FDCF5F69B64E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unit", "src\Senpai.Unit\Unit.csproj", "{DD72CF82-75A1-43AC-83CD-76B42575629C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample", "sample\Sample.csproj", "{DD72CF82-75A1-43AC-83CD-76B42575629C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

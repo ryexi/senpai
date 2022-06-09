@@ -2,26 +2,18 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Build",
-            "command": "dotnet",
-            "type": "process",
-            "args": [
-                "build",
-                "${workspaceFolder}/src/Senpai/Senpai.csproj",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary",
-                "--configuration",
-                "Debug"
-            ],
+            "label": "build",
+            "type": "shell",
+            "command": "kio --b debug",
             "problemMatcher": "$msCompile"
         },
         {
-            "label": "Publish",
+            "label": "publish",
             "type": "shell",
             "options": {
                 "cwd": "${workspaceFolder}"
             },
-            "command": "cmd /c build.bat 3",
+            "command": "kio --b publish",
             "problemMatcher": "$msCompile"
         }
     ]
