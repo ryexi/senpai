@@ -1,4 +1,4 @@
-A command-line interpreter for dotnet consoles.
+A command-line interpreter for .NET console.
 
 ## Documentation
 ![](https://raw.githubusercontent.com/imdying/senpai/main/res/link.svg) <a href="https://github.com/imdying/senpai/wiki/">Wikipedia</a>
