@@ -1,11 +1,9 @@
 A command-line interpreter for dotnet consoles.
 
 ## Documentation
-<img src="https://raw.githubusercontent.com/imdying/senpai/main/res/link.svg">
-<a href="https://github.com/imdying/senpai/wiki/">Wikipedia</a>
-
-<img src="https://raw.githubusercontent.com/imdying/senpai/main/res/link.svg">
-<a href="https://github.com/dotnet/command-line-api/tree/v2.0.0-beta3.22114.1/docs">System.CommandLine</a>
+![](https://raw.githubusercontent.com/imdying/senpai/main/res/link.svg) <a href="https://github.com/imdying/senpai/wiki/">Wikipedia</a>
+</br>
+![](https://raw.githubusercontent.com/imdying/senpai/main/res/link.svg) <a href="https://github.com/dotnet/command-line-api/tree/v2.0.0-beta3.22114.1/docs">System.CommandLine</a>
 
 ## Getting started
 ```C#
