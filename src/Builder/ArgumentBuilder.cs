@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace Senpai.Builder;
 
-internal class ArgumentBuilder
+internal static class ArgumentBuilder
 {
     /// <summary>
     /// Build an <see cref="System.CommandLine.Option"/> object.
@@ -12,15 +12,23 @@ internal class ArgumentBuilder
     /// <param name="Attribute">The metadata.</param>
     private static Option BuildOption(dynamic Attribute)
     {
-        var GenericType     = typeof(Option<>).MakeGenericType(Attribute.GetGenericClassType());
+        var GenericType     = typeof(Option<>).MakeGenericType(Attribute.GetGenericType());
         var CreateInstance  = Activator.CreateInstance(GenericType, new object?[] { Attribute.Name, Attribute.Description })!;
         var Option          = (Option)CreateInstance;
 
-        Option.Arity = Convertible.ConvertArgumentArity(Attribute.Arity) ?? Option.Arity;
+        #region Properties
+        if (Attribute.Arity != null)
+            Option.Arity = Intermediate.ConvertEnum(Attribute.Arity);
 
-        // Adding aliases
-        for (int i = 0; i < Attribute.Alias.Length; i++)
-            Option.AddAlias(Attribute.Alias[i]);
+        if (Attribute.Alias != null)
+            Option.AddAlias(Attribute.Alias);
+
+        if (Attribute.Aliases != null)
+            for (int i = 0; i < Attribute.Aliases.Length; i++)
+                Option.AddAlias(Attribute.Aliases[i]);
+
+        Option.IsRequired = Attribute.IsRequired;
+        #endregion
 
         return Option;
     }
@@ -31,85 +39,98 @@ internal class ArgumentBuilder
     /// <param name="Attribute">The metadata.</param>
     private static Argument BuildArgument(dynamic Attribute)
     {
-        var GenericType     = typeof(Argument<>).MakeGenericType(Attribute.GetGenericClassType());
+        var GenericType     = typeof(Argument<>).MakeGenericType(Attribute.GetGenericType());
         var CreateInstance  = Activator.CreateInstance(GenericType, new object?[] { Attribute.Name, Attribute.Description })!;
         var Argument        = (Argument)CreateInstance;
 
-        Argument.Arity = Convertible.ConvertArgumentArity(Attribute.Arity) ?? Argument.Arity;
+
+        #region Properties
+        if (Attribute.Arity != null)
+            Argument.Arity = Intermediate.ConvertEnum(Attribute.Arity);
+
+        if (Attribute.HelpName != null)
+            Argument.HelpName = Attribute.HelpName;
+        #endregion
 
         return (Argument)CreateInstance;
     }
-    
-    public static IValueDescriptor[] Build(Command Command,
-                                           MethodInfo Method)
+
+    /// <summary>
+    /// The # which is all the arguments to process.
+    /// </summary>
+    private static int GetSizeOfParents(List<Command> Parents, out int Size)
     {
-        Attribute[]?        Options              = Convertible.GetGenericAttributes(Method, typeof(Token.Option<>));
-        Attribute[]?        Arguments            = Convertible.GetGenericAttributes(Method, typeof(Token.Argument<>));
+        for (int i = Size = 0; i < Parents.Count; i++)
+            Size += Parents[i].Arguments.Count;
+        return Size;
+    }
+
+    public static IValueDescriptor[] Build(MethodInfo Method, Command Command, bool IsVerb, List<Command> Parents)
+    {
+        // Zero if root or parents have no arg<T>
+        // Non-zero if not root
+        GetSizeOfParents(Parents, out int ParentsParamsSize);
+
+        Attribute[]?        Options              = Intermediate.Attribute.GetGenericAttributes(Method, typeof(Token.Option<>));
+        Attribute[]?        Arguments            = Intermediate.Attribute.GetGenericAttributes(Method, typeof(Token.Argument<>));
         ParameterInfo[]     Parameters           = Method.GetParameters();
         IValueDescriptor[]  ValueDescriptors     = new IValueDescriptor[Parameters.Length];
-        dynamic[]           AttributeDescriptors = new dynamic[Parameters.Length];
+        dynamic[]           AttributeDescriptors;
 
-        if (Parameters.Length != (Arguments.Length + Options.Length))
-            throw new Exception("Arguments and/or options don't match the length of params.");
+        if (Parameters.Length != (Arguments.Length + Options.Length + ParentsParamsSize))
+            throw new Exception("Parameters length mismatch.");
 
         if (Parameters.Length > 16)
             throw new Exception("Model binding more than 16 options and arguments is not supported.");
 
         /*
          * Converting the generic argument and option attributes to their underlying type.
-         * And, sorting the attributes' placement.
          */
         {
-            int Index     = 0;
-            int Placement = 0;
+            int Index = 0;
+            AttributeDescriptors = new dynamic[Parameters.Length - ParentsParamsSize];
 
-            // Arguments
             for (int i = 0; i < Arguments.Length; i++, Index++)
-            {
-                AttributeDescriptors[Index] = Convertible.ConvertGenericAttribute(Arguments[i], typeof(Token.Argument<>));
-                if (((uint?)AttributeDescriptors[Index].Index).HasValue)
-                    Placement++;
-            }
+                AttributeDescriptors[Index] = Intermediate.Attribute.ConvertType(Arguments[i], typeof(Token.Argument<>));
 
-            // Options
             for (int i = 0; i < Options.Length; i++, Index++)
-            {
-                AttributeDescriptors[Index] = Convertible.ConvertGenericAttribute(Options[i], typeof(Token.Option<>));
-                if (((uint?)AttributeDescriptors[Index].Index).HasValue)
-                    Placement++;
-            }
+                AttributeDescriptors[Index] = Intermediate.Attribute.ConvertType(Options[i], typeof(Token.Option<>));
 
-            if (Placement > 0 && Placement != Parameters.Length)
-                throw new Exception("Missing indexes.");
-
-            // Expecting the args to be in correlation with the method's params.
-            if (Placement > 0)
+            if (Parameters.Length > 0)
                 AttributeDescriptors = AttributeDescriptors.OrderBy(s => s.Index).ToArray();
         }
 
         /*
-         * Retrieving information from the attributes and building the arguments and options.
+         * Retrieving data from the attributes and building the arguments and options.
+         * Additionally, if the command is a verb, append the args of the parents.
          */
         {
-            for (int i = 0; i < AttributeDescriptors.Length; i++)
-            {
-                ParameterInfo    Parameter           = Parameters[i];
-                dynamic          AttributeDescriptor = AttributeDescriptors[i];
-                IValueDescriptor ValueDescriptor;
+            int Index = ParentsParamsSize;
 
-                if (Parameter.ParameterType != AttributeDescriptor.GetGenericClassType())
-                    throw new Exception("Type mismatch.");
-                
-                if (i < Arguments.Length) 
+            if (IsVerb && ParentsParamsSize > 0)
+            {
+                for (int i = 0; i < Parents.Count; i++)
                 {
-                    ValueDescriptor = ValueDescriptors[i] = BuildArgument(AttributeDescriptor);
-                    Command.AddArgument((Argument)ValueDescriptor);
-                } 
-                else 
-                {
-                    ValueDescriptor = ValueDescriptors[i] = BuildOption(AttributeDescriptor);
-                    Command.AddOption((Option)ValueDescriptor);
+                    var Parent = Parents[i];
+                    var Argument = Parents[i].Arguments;
+
+                    for (int c = 0; c < Argument.Count; c++)
+                        ValueDescriptors[i] = Argument[c];
                 }
+            }
+
+            for (int i = 0; i < AttributeDescriptors.Length; i++, Index++)
+            {
+                var Parameter = Parameters[i];
+                var AttributeDescriptor = AttributeDescriptors[i];
+
+                if (Parameter.ParameterType != AttributeDescriptor.GetGenericType())
+                    throw new Exception(string.Format("The parameter '{0}' and argument '{1}' don't have a matching type.", Parameter.Name, AttributeDescriptor.Name));
+
+                if (i < Arguments.Length)
+                    Command.AddArgument((Argument)(ValueDescriptors[Index] = BuildArgument(AttributeDescriptor)));
+                else
+                    Command.AddOption((Option)(ValueDescriptors[Index] = BuildOption(AttributeDescriptor)));
             }
         }
 

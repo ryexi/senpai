@@ -7,10 +7,10 @@ internal partial class Exception : System.Exception
 {
     public Exception(string message) : base(message)
     {
-        this.SourceProvider = Internal.OpenSourceProvider;
+        this._Source = Internal.GetCapturedSource();
     }
 
-    private StackInfo? SourceProvider
+    private StackInfo? _Source
     {
         get;
         set;
@@ -20,10 +20,10 @@ internal partial class Exception : System.Exception
     {
         get
         {
-            if (!SourceProvider.HasValue)
+            if (!_Source.HasValue)
                 return base.StackTrace;
             else
-                return base.StackTrace + "\r\n   at " + SourceProvider?.Member + " in " + SourceProvider?.File + ":line " + SourceProvider?.Line;
+                return base.StackTrace + "\r\n   at " + _Source?.Member + " in " + _Source?.File + ":line " + _Source?.Line;
         }
     }
 }

@@ -7,78 +7,70 @@ namespace Senpai.Token;
 [AttributeUsage(AttributeTargets.Method,
                 AllowMultiple = true,
                 Inherited = false)]
-public sealed class Option<T> : Attribute
+public sealed class Option<T> : Symbol<T>
 {
     /// <summary>
     /// Represents <see cref="System.CommandLine.Option"/>
     /// </summary>
+    /// <param name="Id">The position of its parameter.</param>
     /// <param name="Name">The name of the option.</param>
-    public Option(string Name) : this(null, Name, null)
+    public Option(uint Id, string Name) : this(Id, Name, string.Empty)
     {
-        // Empty
     }
 
     /// <summary>
     /// Represents <see cref="System.CommandLine.Option"/>
     /// </summary>
-    /// <param name="Index">The order of its parameter.</param>
+    /// <param name="Id">The position of its parameter.</param>
     /// <param name="Name">The name of the option.</param>
-    public Option(uint Index, string Name) : this(Index, Name, null)
+    /// <param name="Description">The description of the option. </param>
+    public Option(uint Id, string Name, string Description)
     {
-        // Empty
-    }
+        if (string.IsNullOrWhiteSpace(this.Name = Name))
+            throw new ArgumentNullException(nameof(Name));
 
-    Option(uint? index, string name, string? description)
-    {
-        if (string.IsNullOrWhiteSpace(this.Name = name))
-            throw new ArgumentException("Contains whitespace or null.");
+        if (!string.IsNullOrEmpty(Description))
+            this.Description = Description;
 
-        this.Description = description ?? "No description provided.";
-        this.Index = index;
-    }
-
-    public string Name
-    {
-        get;
-        private set;
+        this.Index = Id;
+        this.Aliases = new string[0];
     }
 
     /// <summary>
-    /// The description of the argument.
-    /// </summary>
-    public string? Description
-    {
-        get;
-        set;
-    }
-
-    /// <summary>
-    /// Define alias/es for the option.
-    /// </summary>
-    public string[] Alias
-    {
-        get;
-        set;
-    } = new string[0];
-
-    /// <summary>
-    /// Control how many values should be provided.
+    /// A string that can be used on the command line to specify the option.
     /// </summary>
     /// <value></value>
+    public string? Alias
+    {
+        get;
+        set;
+    }
+
+    /// <summary>
+    /// The set of strings that can be used on the command line to specify the option.
+    /// </summary>
+    public string[] Aliases
+    {
+        get;
+        set;
+    }
+
+    /// <summary>
+    /// Defines the arity of an option or argument.
+    /// </summary>
     public ArgumentArity Arity
     {
         get;
         set;
-    } = ArgumentArity.Default;
-
-    internal Type GetGenericClassType()
-    {
-        return typeof(T);
     }
 
-    internal uint? Index
+    /// <summary>
+    /// Indicates whether the option is required when its parent command is invoked.
+    /// </summary>
+    /// <remarks>When an option is required and its parent command is invoked without it, an error results</remarks>
+    public bool IsRequired
     {
         get;
-        private set;
+        set;
     }
 }

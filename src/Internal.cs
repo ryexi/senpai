@@ -14,18 +14,36 @@ internal static class Internal
         set;
     }
 
-    /// <summary>
-    /// Returns the <see cref="Senpai.Exception.StackInfo"/> object of a <see cref="Senpai.Token.Command"/> object.
-    /// </summary>
-    /// <remarks>This field has to be manually updated in order to provide relevant info when throwing an exception of <see cref="Senpai.Exception"/>.</remarks>
-    public static StackInfo? OpenSourceProvider
+    /// <remarks>
+    /// This field has to be manually updated in order to provide relevant info when throwing an exception of <see cref="Senpai.Exception"/>.
+    /// </remarks>
+    private static StackInfo? CapturedSource
     {
         get;
         set;
     }
 
-    public static void ReleaseSourceProvider()
+    /// <summary>
+    /// Captures the <see cref="Senpai.Exception.StackInfo"/> object of a <see cref="Senpai.Token.Command"/> object.
+    /// </summary>
+    public static void CaptureSource(StackInfo Source)
     {
-        OpenSourceProvider = null;
+        CapturedSource = Source;
+    }
+
+    /// <summary>
+    /// Returns the <see cref="Senpai.Exception.StackInfo"/> object of a <see cref="Senpai.Token.Command"/> object.
+    /// </summary>
+    public static StackInfo? GetCapturedSource()
+    {
+        return CapturedSource;
+    }
+
+    /// <summary>
+    /// Free <see cref="Senpai.Internal.CapturedSource"/>
+    /// </summary>
+    public static void FreeCapturedSource()
+    {
+        CapturedSource = null;
     }
 }

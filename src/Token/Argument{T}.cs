@@ -7,70 +7,50 @@ namespace Senpai.Token;
 [AttributeUsage(AttributeTargets.Method,
                 AllowMultiple = true,
                 Inherited = false)]
-public sealed class Argument<T> : Attribute
+public sealed class Argument<T> : Symbol<T>
 {
     /// <summary>
     /// Represents <see cref="System.CommandLine.Argument"/>
     /// </summary>
+    /// <param name="Id">The position of its parameter.</param>
     /// <param name="Name">The name of the argument.</param>
-    public Argument(string Name) : this(null, Name, null)
+    public Argument(uint Id, string Name) : this(Id, Name, string.Empty)
     {
-        // Empty
     }
-    
+
     /// <summary>
     /// Represents <see cref="System.CommandLine.Argument"/>
     /// </summary>
-    /// <param name="Index">The order of its parameter.</param>
-    /// <param name="Name">The name of the argument</param>
-    /// <returns></returns>
-    public Argument(uint Index, string Name) : this(Index, Name, null)
+    /// <param name="Id">The position of its parameter.</param>
+    /// <param name="Name">The name of the argument.</param>
+    /// <param name="Description">The description of the argument.</param>
+    public Argument(uint Id, string Name, string Description)
     {
-        // Empty
-    }
+        if (string.IsNullOrWhiteSpace(this.Name = Name))
+            throw new ArgumentNullException(nameof(Name));
 
-    Argument(uint? index, string name, string? description)
-    {
-        if (string.IsNullOrWhiteSpace(this.Name = name))
-            throw new ArgumentException("Contains whitespace or null.");
+        if (!string.IsNullOrEmpty(Description))
+            this.Description = Description;
 
-        this.Description = description ?? "No description provided.";
-        this.Index = index;
-    }
-
-    public string Name
-    {
-        get;
-        private set;
+        this.Index = Id;
     }
 
     /// <summary>
-    /// The description of the argument.
+    /// The name used in help output to describe the argument.
     /// </summary>
-    public string Description
+    public string? HelpName
     {
         get;
         set;
     }
 
     /// <summary>
-    /// Control how many values should be provided.
+    /// Defines the arity of an option or argument.
     /// </summary>
-    /// <value></value>
+
     public ArgumentArity Arity
     {
         get;
         set;
-    } = ArgumentArity.Default;
-
-    internal Type GetGenericClassType()
-    {
-        return typeof(T);
-    }
-
-    internal uint? Index
-    {
-        get;
-        private set;
     }
 }

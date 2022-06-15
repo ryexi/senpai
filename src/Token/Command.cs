@@ -6,11 +6,13 @@ namespace Senpai.Token;
 [AttributeUsage(AttributeTargets.Method,
                 AllowMultiple = false,
                 Inherited = false)]
-public sealed class Command : Attribute
+public sealed class Command : Symbol
 {
     /// <summary>
     /// Declare a method as a command.
     /// </summary>
+    /// <param name="Name">The name of the command.</param>
+    /// <param name="Description">The description of the command.</param>
     public Command(string Name,
                    string? Description                     = default,
                    [CallerFilePath]   string? __reserved_1 = default,
@@ -20,10 +22,10 @@ public sealed class Command : Attribute
         if (string.IsNullOrWhiteSpace(this.Name = Name))
             throw new ArgumentNullException(nameof(Name));
 
-        if (string.IsNullOrWhiteSpace(this.Description = Description ?? string.Empty))
-            this.Description = "No description provided.";
+        if (!string.IsNullOrEmpty(Description))
+            this.Description = Description;
 
-        this.SourceProvider = new StackInfo() {
+        this.Source = new StackInfo() {
             File    = __reserved_1,
             Member  = __reserved_2,
             Line    = (uint)__reserved_3
@@ -33,28 +35,18 @@ public sealed class Command : Attribute
     /// <summary>
     /// The name of the command.
     /// </summary>
-    public string Name
+    internal override string Name
     {
-        get;
-        private set;
+        get => base.Name;
+        set => base.Name = value;
     }
 
     /// <summary>
     /// The description of the command.
     /// </summary>
-    public string Description
+    public override string Description
     {
-        get;
-        set;
-    }
-
-    /// <summary>
-    /// The source of the caller.
-    /// </summary>
-    /// <remarks>Debugging information</remarks>
-    internal StackInfo SourceProvider
-    {
-        get;
-        private set;
+        get => base.Description;
+        set => base.Description = value;
     }
 }

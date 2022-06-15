@@ -1,46 +1,38 @@
-A command-line interpreter for .NET consoles.
+A declarative way of building .NET consoles.
 
 ## Documentation
-![](https://raw.githubusercontent.com/imdying/senpai/main/res/link.svg) <a href="https://github.com/imdying/senpai/wiki/">Wikipedia</a>
-</br>
-![](https://raw.githubusercontent.com/imdying/senpai/main/res/link.svg) <a href="https://github.com/dotnet/command-line-api/tree/v2.0.0-beta3.22114.1/docs">System.CommandLine</a>
+* <a href="https://github.com/imdying/senpai/wiki/">Wikipedia</a>
+* <a href="https://github.com/dotnet/command-line-api/tree/v2.0.0-beta3.22114.1/docs">System.CommandLine</a>
 
 ## Getting started
 ```C#
 using Senpai;
 using Senpai.Token;
 
-static void Main(string[] args)
-{
-    Cli.Initialize(args);
-}
-
-[Command("test")]
-public static void myMethod() 
-{
-    // my code
-}
-```
-
-### A complex-ish command.
-```C#
 [Command(
-    Name: "operation",
-    Description = "Does something."
+    Name: "do",
+    Description: "Do something."
 )]
 [Option<bool>(
-    Name: "--delete", 
-    Description = "Delete something."
+    Id: 2
+    Name: "--alt", 
+    Description: "An option which alter something."
 )]
 [Argument<string>(
-    Name: "A user-input or pathname.", 
-    Arity = ArgumentArity.ZeroOrOne
+    Id: 1
+    Name: "Input",
+    Arity = ArgumentArity.ExactlyOne
 )]
-public static void myMethod(string Input, bool Delete) 
+public static void myMethod(string Input, bool Alter) 
 {
     // my code
+}
+
+static void Main(string[] args)
+{
+    Cli.Initialize(args, "This is my app's description.");
 }
 ```
 
 ## Under the hood
-By retrieving metadata through reflection, Senpai is able to dynamically initialize the [System.CommandLine](https://github.com/dotnet/command-line-api) library to act as its command-line interpreter. But all of this comes at the price of some [limitations](/LIMITS.md) and performance lost.
+Senpai is able to simplify the process of building a cli by making use of the [new generic attribute feature](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-11#generic-attributes). A *little bit* of reflection-ing and Senpai is able to dynamically build and initialize the [System.CommandLine](https://github.com/dotnet/command-line-api) library to act as its command-line interpreter. But all of this comes at the price of some [limitations](/LIMITS.md) and performance lost.
