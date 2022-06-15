@@ -35,4 +35,6 @@ static void Main(string[] args)
 ```
 
 ## Under the hood
-Senpai is able to simplify the process of building a cli by making use of the [new generic attribute feature](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-11#generic-attributes). A *little bit* of reflection-ing and Senpai is able to dynamically build and initialize the [System.CommandLine](https://github.com/dotnet/command-line-api) library to act as its command-line interpreter. But all of this comes at the price of some [limitations](/LIMITS.md) and performance lost.
+Senpai is able to simplify the process of building a cli by making use of the [new generic attribute feature](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-11#generic-attributes). 
+
+A *little bit* of reflection-ing and Senpai is able to dynamically build and initialize the [System.CommandLine](https://github.com/dotnet/command-line-api) library to act as its command-line interpreter. But all of this comes at the price of some [limitations](/LIMITS.md) and performance lost.
