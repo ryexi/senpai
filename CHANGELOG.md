@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [2.0.0] - 2022-06-15
+## [2.0.0-beta.1.0] - 2022-06-15
 ### Added
 * `Argument(string Name, string Description)` - Added a new constructor for `Argument<T>`.
 * `HelpName` - Added a new property for `Argument<T>`.
