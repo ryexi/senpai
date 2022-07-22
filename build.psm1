@@ -1,13 +1,12 @@
 # Tested on PowerShell 7.2
 # For more information, refer to https://github.com/imdying/kio
-
 ImportDependencies;
 
-$sample  = './sample/Sample.csproj';
+$test = './test/Test.csproj';
 $project = './src/Senpai.csproj';
 
 function Debug {
-    dotnet build $sample
+    dotnet build $test
 }
 
 function Publish {

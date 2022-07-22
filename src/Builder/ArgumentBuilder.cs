@@ -18,7 +18,7 @@ internal static class ArgumentBuilder
 
         #region Properties
         if (Attribute.Arity != null)
-            Option.Arity = Intermediate.ConvertEnum(Attribute.Arity);
+            Option.Arity = Operation.Cast.ConvertArity(Attribute.Arity);
 
         if (Attribute.Alias != null)
             Option.AddAlias(Attribute.Alias);
@@ -46,7 +46,7 @@ internal static class ArgumentBuilder
 
         #region Properties
         if (Attribute.Arity != null)
-            Argument.Arity = Intermediate.ConvertEnum(Attribute.Arity);
+            Argument.Arity = Operation.Cast.ConvertArity(Attribute.Arity);
 
         if (Attribute.HelpName != null)
             Argument.HelpName = Attribute.HelpName;
@@ -65,17 +65,17 @@ internal static class ArgumentBuilder
         return Size;
     }
 
-    public static IValueDescriptor[] Build(MethodInfo Method, Command Command, bool IsVerb, List<Command> Parents)
+    public static IValueDescriptor[] Build(MethodInfo Method, Command Command, List<Command> Parents)
     {
-        // Zero if root or parents have no arg<T>
-        // Non-zero if not root
-        GetSizeOfParents(Parents, out int ParentsParamsSize);
-
-        Attribute[]?        Options              = Intermediate.Attribute.GetGenericAttributes(Method, typeof(Token.Option<>));
-        Attribute[]?        Arguments            = Intermediate.Attribute.GetGenericAttributes(Method, typeof(Token.Argument<>));
+        Attribute[]?        Options              = Operation.Reflection.GetGenericAttributes(Method, typeof(Token.Option<>));
+        Attribute[]?        Arguments            = Operation.Reflection.GetGenericAttributes(Method, typeof(Token.Argument<>));
         ParameterInfo[]     Parameters           = Method.GetParameters();
         IValueDescriptor[]  ValueDescriptors     = new IValueDescriptor[Parameters.Length];
         dynamic[]           AttributeDescriptors;
+
+        // Zero if root or parents have no arg<T>
+        // Non-zero if not root
+        GetSizeOfParents(Parents, out int ParentsParamsSize);
 
         if (Parameters.Length != (Arguments.Length + Options.Length + ParentsParamsSize))
             throw new Exception("Parameters length mismatch.");
@@ -91,10 +91,10 @@ internal static class ArgumentBuilder
             AttributeDescriptors = new dynamic[Parameters.Length - ParentsParamsSize];
 
             for (int i = 0; i < Arguments.Length; i++, Index++)
-                AttributeDescriptors[Index] = Intermediate.Attribute.ConvertType(Arguments[i], typeof(Token.Argument<>));
+                AttributeDescriptors[Index] = Operation.Cast.ConvertAttributeToType(Arguments[i], typeof(Token.Argument<>));
 
             for (int i = 0; i < Options.Length; i++, Index++)
-                AttributeDescriptors[Index] = Intermediate.Attribute.ConvertType(Options[i], typeof(Token.Option<>));
+                AttributeDescriptors[Index] = Operation.Cast.ConvertAttributeToType(Options[i], typeof(Token.Option<>));
 
             if (Parameters.Length > 0)
                 AttributeDescriptors = AttributeDescriptors.OrderBy(s => s.Index).ToArray();
@@ -107,7 +107,7 @@ internal static class ArgumentBuilder
         {
             int Index = ParentsParamsSize;
 
-            if (IsVerb && ParentsParamsSize > 0)
+            if (ParentsParamsSize > 0)
             {
                 for (int i = 0; i < Parents.Count; i++)
                 {
@@ -121,7 +121,7 @@ internal static class ArgumentBuilder
 
             for (int i = 0; i < AttributeDescriptors.Length; i++, Index++)
             {
-                var Parameter = Parameters[i];
+                var Parameter = Parameters[Index];
                 var AttributeDescriptor = AttributeDescriptors[i];
 
                 if (Parameter.ParameterType != AttributeDescriptor.GetGenericType())

@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## Unreleased
+This version brought breaking changes to the library.
+
+### Added
+* A property `Summary` for the `[Command]` attribute.
+
+### Changed
+* Placing `[Command]` on methods is no longer supported. Commands are now class-based.
+* The `Command` constructor only takes a single parameter from now on.
+
+### Removed
+* `Verb` attribute - It has no uses anymore.
+
 ## [2.0.0-beta.1.0] - 2022-06-15
 ### Added
 * `Argument(uint Index, string Name, string Description)` - Added a new constructor for `Argument<T>`.

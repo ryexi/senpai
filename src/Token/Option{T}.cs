@@ -56,15 +56,6 @@ public sealed class Option<T> : Symbol<T>
     }
 
     /// <summary>
-    /// Defines the arity of an option or argument.
-    /// </summary>
-    public ArgumentArity Arity
-    {
-        get;
-        set;
-    }
-
-    /// <summary>
     /// Indicates whether the option is required when its parent command is invoked.
     /// </summary>
     /// <remarks>When an option is required and its parent command is invoked without it, an error results</remarks>

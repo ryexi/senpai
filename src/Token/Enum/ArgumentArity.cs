@@ -6,11 +6,8 @@ namespace Senpai.Token;
 /// <remarks>The arity refers to the number of values that can be passed on the command line.</remarks>
 public enum ArgumentArity : uint
 {
-    /// <summary>
-    /// The default behavior.
-    /// </summary>
     Default,
-
+    
     /// <summary>
     /// An arity that does not allow any values.
     /// </summary>

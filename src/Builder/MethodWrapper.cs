@@ -2,7 +2,7 @@ using System.Reflection;
 
 namespace Senpai;
 
-internal static class InovacationWrapper
+internal static class MethodWrapper
 {
 #if DEBUG
     internal static void Generate()

@@ -14,36 +14,31 @@ internal static class Internal
         set;
     }
 
+    /// <summary>
+    /// CallerFilePathAttribute 
+    /// </summary>
     /// <remarks>
-    /// This field has to be manually updated in order to provide relevant info when throwing an exception of <see cref="Senpai.Exception"/>.
+    /// This property has to be manually updated in order to provide relevant info when throwing an exception of <see cref="Senpai.Exception"/>.
     /// </remarks>
-    private static StackInfo? CapturedSource
+    public static StackTraceObject? CapturedCaller
     {
         get;
-        set;
+        private set;
     }
 
     /// <summary>
-    /// Captures the <see cref="Senpai.Exception.StackInfo"/> object of a <see cref="Senpai.Token.Command"/> object.
+    /// Captures the <see cref="Senpai.Exception.StackTraceObject"/> object of a <see cref="Senpai.Token.Command"/> object.
     /// </summary>
-    public static void CaptureSource(StackInfo Source)
+    public static void CaptureCaller(StackTraceObject source)
     {
-        CapturedSource = Source;
-    }
-
-    /// <summary>
-    /// Returns the <see cref="Senpai.Exception.StackInfo"/> object of a <see cref="Senpai.Token.Command"/> object.
-    /// </summary>
-    public static StackInfo? GetCapturedSource()
-    {
-        return CapturedSource;
+        CapturedCaller = source;
     }
 
     /// <summary>
     /// Free <see cref="Senpai.Internal.CapturedSource"/>
     /// </summary>
-    public static void FreeCapturedSource()
+    public static void FreeCapturedCaller()
     {
-        CapturedSource = null;
+        CapturedCaller = null;
     }
 }

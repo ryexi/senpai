@@ -43,14 +43,4 @@ public sealed class Argument<T> : Symbol<T>
         get;
         set;
     }
-
-    /// <summary>
-    /// Defines the arity of an option or argument.
-    /// </summary>
-
-    public ArgumentArity Arity
-    {
-        get;
-        set;
-    }
 }

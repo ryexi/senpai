@@ -5,16 +5,7 @@ namespace Senpai.Token;
 public abstract class Symbol : Attribute
 {
     /// <summary>
-    /// The name of the argument.
-    /// </summary>
-    internal virtual string Name
-    {
-        get;
-        set;
-    } = string.Empty;
-
-    /// <summary>
-    /// The description of the argument.
+    /// The description of the symbol.
     /// </summary>
     public virtual string Description
     {
@@ -23,9 +14,27 @@ public abstract class Symbol : Attribute
     } = "No description provided.";
 
     /// <summary>
+    /// Defines the arity of an option or argument.
+    /// </summary>
+    public ArgumentArity Arity
+    {
+        get;
+        set;
+    }
+
+    /// <summary>
+    /// The name of the symbol.
+    /// </summary>
+    internal virtual string Name
+    {
+        get;
+        set;
+    } = string.Empty;
+
+    /// <summary>
     /// Debugging information about the source of the caller.
     /// </summary>
-    internal virtual StackInfo Source
+    internal virtual StackTraceObject StackTrace
     {
         get;
         set;

@@ -10,7 +10,7 @@ internal static class InvocationBuilder
     {
         var Parameters     = Method.GetParameters();
         var HandlerMethods = typeof(System.CommandLine.Handler).GetMethods();
-        var GenericWrapper = typeof(InovacationWrapper).GetMethods().Where(m => m.GetGenericArguments().Length == Parameters.Length).ToArray().FirstOrDefault()!;
+        var GenericWrapper = typeof(MethodWrapper).GetMethods().Where(m => m.GetGenericArguments().Length == Parameters.Length).ToArray().FirstOrDefault()!;
         
         //! Hypothetically, this shit might crash.
         //! There might be a chance of this not grabbing the Action<> but instead the Func<>.
