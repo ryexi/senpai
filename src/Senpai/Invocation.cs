@@ -6,11 +6,18 @@ namespace Senpai
     {
         public static void Handle(Command command, InvocationContext context)
         {
-            var op1 = context.ParseResult.GetValueForOption(command.Options.ToArray()[0]);
-            Console.WriteLine(op1);
-            Console.WriteLine(op1 is null);
+            var objects = new List<object?>();
 
-            // invoke(params)
+            for (int i = 0; i < command.Inheritance?.Count; i++)
+                objects.Add(context.ParseResult.GetValueForArgument(command.Inheritance[i]));
+
+            for (int i = 0; i < command.Arguments?.Count; i++)
+                objects.Add(context.ParseResult.GetValueForArgument(command.Arguments[i]));
+            
+            for (int i = 0; i < command.Options?.Count; i++)
+                objects.Add(context.ParseResult.GetValueForOption(command.Options[i]));
+
+            command.Invoker?.Invoke(null, objects.ToArray());
         }
     }
 }
