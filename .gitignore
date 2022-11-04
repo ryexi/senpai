@@ -1,3 +1,2 @@
-bin/
-obj/
-nuget/
+.vs/
+artifacts/
