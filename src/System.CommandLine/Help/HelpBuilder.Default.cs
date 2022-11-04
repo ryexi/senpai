@@ -97,7 +97,13 @@ public partial class HelpBuilder
         /// Gets the description for the specified symbol (typically the used as the second column in help text).
         /// </summary>
         /// <param name="symbol">The symbol to get the description for.</param>
-        public static string GetIdentifierSymbolDescription(IdentifierSymbol symbol) => symbol.Description ?? string.Empty;
+        public static string GetIdentifierSymbolDescription(IdentifierSymbol symbol)
+        {
+            if (symbol is Command command)
+                return command.Synopsis ?? command.Description ?? string.Empty;
+            else
+                return symbol.Description ?? string.Empty;
+        }
 
         /// <summary>
         /// Gets the usage label for the specified symbol (typically used as the first column text in help output).

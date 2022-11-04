@@ -33,6 +33,18 @@ namespace System.CommandLine
         {
         }
 
+#pragma warning disable CS1591 // Missing XML comment for internally visible type or member
+        public Command(string name, string? synopsis, string? description) : base(name, description) => Synopsis = synopsis;
+#pragma warning restore CS1591 // Missing XML comment for internally visible type or member
+
+#pragma warning disable CS1591 // Missing XML comment for internally visible type or member
+        public virtual string? Synopsis
+#pragma warning restore CS1591 // Missing XML comment for internally visible type or member
+        {
+            get;
+            set;
+        }
+
         /// <summary>
         /// Gets the child symbols.
         /// </summary>
