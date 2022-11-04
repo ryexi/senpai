@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
 
-namespace Testing
+namespace Test
 {
-    public partial class Program
+    internal partial class Program
     {
         public static void Benchmark(Action action)
         {

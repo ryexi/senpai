@@ -186,7 +186,11 @@ namespace System.CommandLine
         /// <summary>
         /// The <see cref="System.Type"/> that the option's arguments are expected to be parsed as.
         /// </summary>
-        public Type ValueType => Argument.ValueType;
+        public Type ValueType 
+        { 
+            get => Argument.ValueType; 
+            set => Argument.ValueType = value; 
+        }
 
         bool IValueDescriptor.HasDefaultValue => Argument.HasDefaultValue;
 

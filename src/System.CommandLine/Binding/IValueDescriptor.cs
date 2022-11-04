@@ -16,7 +16,7 @@ namespace System.CommandLine.Binding
         /// <summary>
         /// The type of the value.
         /// </summary>
-        Type ValueType { get; }
+        Type ValueType { get; set; }
 
         /// <summary>
         /// Gets a value determining whether there is a default value.

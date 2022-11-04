@@ -1,10 +1,10 @@
 ﻿namespace Test
 {
-    internal class Program
+    internal partial class Program
     {
         static void Main(string[] args)
         {
-            Benchmark(() => App.Run(new(args)));
+            // Benchmark(() => App.Run(new(args)));
         }
     }
 }

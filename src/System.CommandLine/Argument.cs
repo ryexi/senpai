@@ -83,7 +83,7 @@ namespace System.CommandLine
         /// <summary>
         /// Gets or sets the <see cref="Type" /> that the argument token(s) will be converted to.
         /// </summary>
-        public abstract Type ValueType { get; }
+        public abstract Type ValueType { get; set; }
 
         private protected override string DefaultName
         {
