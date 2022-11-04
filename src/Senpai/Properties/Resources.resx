@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="COMMAND_INVOKE" xml:space="preserve">
+  <data name="COMMAND_HANDLER_NAME" xml:space="preserve">
     <value>Invoke</value>
   </data>
   <data name="COMMAND_NO_DESCRIPTION" xml:space="preserve">

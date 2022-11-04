@@ -19,6 +19,8 @@ namespace System.CommandLine
         private List<ValidateSymbolResult<OptionResult>>? _validators;
         private readonly Argument _argument;
 
+        internal Option(string name, string? description) : this(name, description, new Argument<object>()) {}
+
         internal Option(
             string name,
             string? description,
@@ -186,7 +188,7 @@ namespace System.CommandLine
         /// <summary>
         /// The <see cref="System.Type"/> that the option's arguments are expected to be parsed as.
         /// </summary>
-        public Type ValueType 
+        public virtual Type ValueType 
         { 
             get => Argument.ValueType; 
             set => Argument.ValueType = value; 

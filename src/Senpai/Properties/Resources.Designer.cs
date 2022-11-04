@@ -63,9 +63,9 @@ namespace Senpai.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Invoke.
         /// </summary>
-        internal static string COMMAND_INVOKE {
+        internal static string COMMAND_HANDLER_NAME {
             get {
-                return ResourceManager.GetString("COMMAND_INVOKE", resourceCulture);
+                return ResourceManager.GetString("COMMAND_HANDLER_NAME", resourceCulture);
             }
         }
         

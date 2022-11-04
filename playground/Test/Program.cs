@@ -1,4 +1,4 @@
-﻿using Senpai;
+﻿global using Senpai;
 
 namespace Test
 {

@@ -24,14 +24,15 @@ namespace System.CommandLine
         private List<Command>? _subcommands;
         private List<ValidateSymbolResult<CommandResult>>? _validators;
 
+        /// <inheritdoc cref="Command(string, string?)"/>
+        public Command() {}
+
         /// <summary>
         /// Initializes a new instance of the Command class.
         /// </summary>
         /// <param name="name">The name of the command.</param>
         /// <param name="description">The description of the command, shown in help.</param>
-        public Command(string name, string? description = null) : base(name, description)
-        {
-        }
+        public Command(string name, string? description = null) : base(name, description) {}
 
 #pragma warning disable CS1591 // Missing XML comment for internally visible type or member
         public Command(string name, string? synopsis, string? description) : base(name, description) => Synopsis = synopsis;
