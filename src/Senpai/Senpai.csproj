@@ -14,7 +14,7 @@
   <Import Project="Senpai.NuGet.Props" />
 
   <ItemGroup>
-    <ProjectReference Include="..\System.CommandLine\System.CommandLine.csproj" />
+    <ProjectReference Include="..\System.CommandLine\System.CommandLine.csproj" PrivateAssets="all" />
     <PackageReference Include="Teronis.MSBuild.Packaging.ProjectBuildInPackage" Version="1.0.0" PrivateAssets="all" />
   </ItemGroup>
 
