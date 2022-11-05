@@ -63,12 +63,11 @@ namespace Senpai
         /// <summary>
         /// If <see langword="x"/> is a valid <see cref="CommandAttribute"/> component.
         /// </summary>
-        public static IEnumerable<Type> WhereCommand(this IEnumerable<Type> types, bool isNested = false)
-            => types.Where(t =>
-                t.IsClass
-                && (t.IsNested == isNested)
-                && t.IsAbstract
-                && t.IsSealed
-                && t.GetCustomAttributes(typeof(CommandAttribute), false).Length > 0);
+        public static IEnumerable<Type> WhereCommand(this IEnumerable<Type> types, bool isNested = false) => types.Where(
+            t => t.IsClass
+                 && (t.IsNested == isNested)
+                 && t.IsAbstract
+                 && t.IsSealed
+                 && t.GetCustomAttributes(typeof(CommandAttribute), false).Length > 0);
     }
 }

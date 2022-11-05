@@ -9,7 +9,7 @@
 public enum ArgumentArity : uint
 {
     Default,
-    
+
     /// <summary>
     /// An arity that does not allow any values.
     /// </summary>

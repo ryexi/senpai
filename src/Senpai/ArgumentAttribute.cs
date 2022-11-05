@@ -13,13 +13,14 @@ namespace Senpai
         private string? name;
 
         /// <inheritdoc cref="ArgumentAttribute"/>
-        /// <param name="Id"></param>
+        /// <param name="Id">The position of its parameter.</param>
         public ArgumentAttribute(uint Id)
         {
             index = Id;
         }
 
         /// <inheritdoc cref="ArgumentAttribute(uint)"/>
+        /// <param name="Id"></param>
         /// <param name="Name">The name of the argument</param>
         public ArgumentAttribute(uint Id, string Name)
         {
@@ -30,6 +31,8 @@ namespace Senpai
         }
 
         /// <inheritdoc cref="ArgumentAttribute(uint, string)"/>
+        /// <param name="Id"></param>
+        /// <param name="Name"></param>
         /// <param name="Description">The description of the argument.</param>
         public ArgumentAttribute(uint Id, string Name, string? Description)
         {
@@ -40,6 +43,7 @@ namespace Senpai
             description = Description;
         }
 
+        /// <inheritdoc cref="ISymbolAttribute.Arity"/>
         public ArgumentArity Arity
         {
             get;
@@ -59,6 +63,7 @@ namespace Senpai
 
         uint ISymbolAttribute.Index => index;
 
+        /// <inheritdoc cref="ISymbolAttribute.IsHidden"/>
         public bool IsHidden
         {
             get;

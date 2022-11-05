@@ -13,7 +13,7 @@ namespace Senpai
         private string? name;
 
         /// <inheritdoc cref="OptionAttribute"/>
-        /// <param name="Id"></param>
+        /// <param name="Id">The position of its parameter.</param>
         /// <param name="Name">The name of the option.</param>
         public OptionAttribute(uint Id, string Name)
         {
@@ -24,6 +24,8 @@ namespace Senpai
         }
 
         /// <inheritdoc cref="OptionAttribute(uint, string)"/>
+        /// <param name="Id"></param>
+        /// <param name="Name"></param>
         /// <param name="Description">The description of the option.</param>
         public OptionAttribute(uint Id, string Name, string? Description)
         {
@@ -53,6 +55,7 @@ namespace Senpai
             set;
         }
 
+        /// <inheritdoc cref="ISymbolAttribute.Arity"/>
         public ArgumentArity Arity
         {
             get;
@@ -63,6 +66,7 @@ namespace Senpai
 
         uint ISymbolAttribute.Index => index;
 
+        /// <inheritdoc cref="ISymbolAttribute.IsHidden"/>
         public bool IsHidden
         {
             get;

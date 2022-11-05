@@ -4,7 +4,6 @@ namespace Senpai
 {
     internal interface ISymbol
     {
-
         public Type ValueType
         {
             get;

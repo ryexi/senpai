@@ -16,6 +16,7 @@
         public CommandAttribute(string Name) : this(Name, null) {}
 
         /// <inheritdoc cref="CommandAttribute(string)"/>
+        /// <param name="Name"></param>
         /// <param name="Summary">A (short) description of the command.</param>
         public CommandAttribute(string Name,
                                 string? Summary)
@@ -25,6 +26,7 @@
         }
 
         /// <inheritdoc cref="CommandAttribute(string, string?)"/>
+        /// <param name="Name"></param>
         /// <param name="Synopsis">A brief summary of the command.</param>
         /// <param name="Description">A description of the command, shown in help.</param>
         public CommandAttribute(string Name,

@@ -23,6 +23,7 @@ namespace Senpai
         }
 
         /// <inheritdoc cref="AppContext(string[])"/>
+        /// <param name="args"></param>
         /// <param name="description">A description of the application.</param>
         public AppContext(string[] args, string? description)
         {
@@ -40,13 +41,13 @@ namespace Senpai
         /// </summary>
         public Assembly Assembly { get; set; } = Assembly.GetCallingAssembly();
 
+#if DEBUG
         /// <summary>
         /// If set to <see langword="true"/>, the "contracts" aka commands, are cached.
         /// </summary>
         /// <remarks>
         /// The cache file is saved in the same directory of the assembly.
         /// </remarks>
-#if DEBUG
         public bool Cache => throw new NotImplementedException();
 #endif
 

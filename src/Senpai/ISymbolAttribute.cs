@@ -2,15 +2,24 @@
 {
     internal interface ISymbolAttribute
     {
+        /// <summary>
+        /// Defines the arity of an option or argument.
+        /// </summary>
+        public ArgumentArity Arity
+        {
+            get;
+            set;
+        }
+
         public string? Description
         {
             get;
         }
 
         /// <summary>
-        /// Defines the arity of an option or argument.
+        /// Gets or sets a value indicating whether the symbol is hidden.
         /// </summary>
-        public ArgumentArity Arity
+        public bool IsHidden
         {
             get;
             set;
@@ -22,12 +31,6 @@
         }
 
         internal string? Name
-        {
-            get;
-            set;
-        }
-
-        public bool IsHidden
         {
             get;
             set;
