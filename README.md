@@ -1,7 +1,7 @@
 # Senpai
 A declarative command-line interpreter.
 
-# Getting started
+## Getting started
 Check out the [sample](https://github.com/imdying/senpai/tree/main/playground/Sample).
 
 ## Documentation
