@@ -188,6 +188,10 @@ public partial class HelpBuilder
                     ctx.WasSectionSkipped = true;
                     return;
                 }
+                else
+                {
+                    ctx.WasSectionSkipped = false;
+                }
 
                 ctx.HelpBuilder.WriteHeading(ctx.HelpBuilder.LocalizationResources.HelpArgumentsTitle(), null, ctx.Output);
                 ctx.HelpBuilder.WriteColumns(commandArguments, ctx);
@@ -246,10 +250,13 @@ public partial class HelpBuilder
                     ctx.WasSectionSkipped = true;
                     return;
                 }
+                else
+                {
+                    ctx.WasSectionSkipped = false;
+                }
 
                 ctx.HelpBuilder.WriteHeading(ctx.HelpBuilder.LocalizationResources.HelpOptionsTitle(), null, ctx.Output);
                 ctx.HelpBuilder.WriteColumns(options, ctx);
-                ctx.Output.WriteLine();
             };
 
         ///  <summary>

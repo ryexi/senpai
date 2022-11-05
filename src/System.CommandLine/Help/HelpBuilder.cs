@@ -71,8 +71,6 @@ namespace System.CommandLine.Help
                     context.Output.WriteLine();
                 }
             }
-
-            context.Output.WriteLine();
         }
 
         internal Action<HelpContext>? OnCustomize { get; set; }
