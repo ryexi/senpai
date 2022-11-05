@@ -13,7 +13,7 @@ namespace Senpai
 
             return new Argument(parameter.ParameterType)
             {
-                Name        = symbol.Name!,
+                Name        = symbol.Name ?? parameter.Name ?? parameter.ParameterType.ToString(),
                 Description = symbol.Description,
                 Arity       = symbol.Arity.Convert(),
                 HelpName    = attribute.HelpName,
