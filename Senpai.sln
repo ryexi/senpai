@@ -15,9 +15,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "System.CommandLine", "src\System.CommandLine\System.CommandLine.csproj", "{55224FB3-8A2D-4A86-AE30-58D1D2219D8C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Senpai", "src\Senpai\Senpai.csproj", "{1DB4B18E-89EE-43D5-BC0A-9BC46B9469DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Senpai", "src\Senpai\Senpai.csproj", "{1DB4B18E-89EE-43D5-BC0A-9BC46B9469DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "playground\Test\Test.csproj", "{1329D3E2-BE87-4038-A933-DCB8F12D826C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test", "playground\Test\Test.csproj", "{1329D3E2-BE87-4038-A933-DCB8F12D826C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample", "playground\Sample\Sample.csproj", "{2B8BC064-524B-459D-B9B3-9D48E20459AE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +39,10 @@ Global
 		{1329D3E2-BE87-4038-A933-DCB8F12D826C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1329D3E2-BE87-4038-A933-DCB8F12D826C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1329D3E2-BE87-4038-A933-DCB8F12D826C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B8BC064-524B-459D-B9B3-9D48E20459AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B8BC064-524B-459D-B9B3-9D48E20459AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B8BC064-524B-459D-B9B3-9D48E20459AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B8BC064-524B-459D-B9B3-9D48E20459AE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
