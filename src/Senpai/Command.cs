@@ -92,9 +92,12 @@ namespace Senpai
             foreach (var argument in arguments)
             {
                 ParameterInfo param;
+
                 try
                 {
-                    param = parameters[((ISymbolAttribute)argument).Index - 1];
+                    // TODO: Fix this shit or rewrite this.
+                    var index = ((ISymbolAttribute)argument).Index;
+                    param = parameters[index == 0 ? 0 : index - 1];
                 }
                 catch (IndexOutOfRangeException)
                 {
