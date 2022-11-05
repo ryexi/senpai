@@ -5,20 +5,30 @@
 /// </summary>
 internal static class Internal
 {
-    public static void Error(string message) => WriteError($"Exception thrown: {message}");
+    public static void Error(string message) => 
+        WriteLine(() => Console.Error.WriteLine($"Exception thrown: {message}"), ConsoleColor.Red, true, -1);
 
-    public static void Error(Type @class, string message) => WriteError($"at {@class.FullName?.Replace('+', '.')}: {message}");
+    public static void Throw(Type @class, string message) => 
+        Error($"{message}\r\n   at {@class.FullName?.Replace('+', '.')}\r\n{Environment.StackTrace}");
 
-    private static void WriteError(string message)
+    private static void WriteLine(Action execute,
+                                  ConsoleColor? key, bool exit, int code = 0)
     {
-        WriteLine(() => Console.Error.WriteLine(message), ConsoleColor.Red);
-        Environment.Exit(-1);
-    }
+        if (key != null)
+        {
+            Console.ForegroundColor = key.Value;
+        }
 
-    private static void WriteLine(Action execute, ConsoleColor? key)
-    {
-        Console.ForegroundColor = key ?? Console.ForegroundColor;
-        execute?.Invoke();
+        if (execute != null)
+        {
+            execute.Invoke();
+        }
+
         Console.ResetColor();
+
+        if (exit)
+        {
+            Environment.Exit(code);
+        }
     }
 }

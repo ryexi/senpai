@@ -78,7 +78,7 @@ namespace Senpai
             var sizeofArgs = (ancestors?[ancestors.Count - 1].Arguments?.Count ?? 0) + (ancestors?[ancestors.Count - 1].Inheritance?.Count ?? 0);
 
             if (parameters.Length != (arguments.Length + sizeofArgs))
-                Internal.Error(Reference!, "Length of parameters and arguments are not equal.");
+                Internal.Throw(Reference!, "Length of parameters and arguments are not equal.");
 
             #region Inheriting the args of the ancestors
             // Inheriting the args of the ancestors.
@@ -98,7 +98,7 @@ namespace Senpai
                 }
                 catch (IndexOutOfRangeException)
                 {
-                    Internal.Error(Reference!, "Index correlation error.");
+                    Internal.Throw(Reference!, "Index correlation error.");
                     throw;
                 }
 

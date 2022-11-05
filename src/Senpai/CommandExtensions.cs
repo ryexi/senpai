@@ -20,7 +20,7 @@ namespace Senpai
             }
             catch (AmbiguousMatchException)
             {
-                Internal.Error(@ref, $"More than one '{Resources.COMMAND_HANDLER_NAME}(...)' found.");
+                Internal.Throw(@ref, $"More than one '{Resources.COMMAND_HANDLER_NAME}(...)' found.");
             }
 
             if (command.Invoker is not null)
@@ -49,7 +49,7 @@ namespace Senpai
                 throw new Exception($"{nameof(attr)} is not of {nameof(CommandAttribute)}.");
 
             if (command.Name is not null && string.IsNullOrWhiteSpace(command.Name))
-                Internal.Error(@ref, "Name cannot be empty or contain whitespace.");
+                Internal.Throw(@ref, "Name cannot be empty or contain whitespace.");
 
             return new Command
             {
