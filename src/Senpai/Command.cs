@@ -107,9 +107,9 @@ namespace Senpai
 
                 if (argument is OptionAttribute option)
                     AddOption(option.ToOption(param));
-
-                this.SetHandler((context) => Invocation.Handle(this, context));
             }
+
+            this.SetHandler((context) => Invocation.Handle(this, context));
         }
 
         private void AddArgument(Argument argument)
