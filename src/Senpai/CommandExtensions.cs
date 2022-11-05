@@ -13,8 +13,20 @@ namespace Senpai
             var command  = @ref.GetCustomAttribute(typeof(CommandAttribute)).ToCommand(@ref)!;
             var children = new Lazy<Type[]>(() => @ref.GetNestedTypes().WhereCommand(true).ToArray());
 
-            if ((command.Invoker = @ref.GetMethod(Resources.COMMAND_HANDLER_NAME)) != null)
+            try
+            {
+                command.Invoker = @ref.GetMethod(Resources.COMMAND_HANDLER_NAME,
+                                                 BindingFlags.Public | BindingFlags.Static);
+            }
+            catch (AmbiguousMatchException)
+            {
+                Internal.Error(@ref, $"More than one '{Resources.COMMAND_HANDLER_NAME}(...)' found.");
+            }
+
+            if (command.Invoker is not null)
+            {
                 command.SetArguments(ancestors);
+            }
 
             if (children.Value.Length > 0)
             {
