@@ -1,4 +1,4 @@
-# Senpai
+# Senpai [![NuGet Badge](https://buildstats.info/nuget/senpai)](https://www.nuget.org/packages/senpai)
 A declarative command-line interpreter.
 
 ## Documentation
