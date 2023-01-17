@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- Switch to the package reference. -->
+    <!-- Switch to the nuget package. -->
     <ProjectReference Include="..\..\src\Senpai\Senpai.csproj" />
   </ItemGroup>
 

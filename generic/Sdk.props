@@ -1,0 +1,14 @@
+<Project>
+
+  <PropertyGroup>
+
+    <ArtifactsDir>$(SolutionDir)artifacts\</ArtifactsDir>
+    <ArtifactPath>$(ArtifactsDir)builds\$(MSBuildProjectName)\</ArtifactPath>
+    <BaseOutputPath>$(ArtifactPath)bin</BaseOutputPath>
+    <BaseIntermediateOutputPath>$(ArtifactPath)obj</BaseIntermediateOutputPath>
+
+  </PropertyGroup>
+  
+  <Import Project="common\Tools.props"/>
+
+</Project>

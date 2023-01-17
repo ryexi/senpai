@@ -1,3 +1,12 @@
-﻿global using Senpai;
+﻿using Senpai;
 
-App.Run(new(args));
+namespace Sample
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            App.Run(new(args));
+        }
+    }
+}
