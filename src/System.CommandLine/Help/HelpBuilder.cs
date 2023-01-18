@@ -15,7 +15,7 @@ namespace System.CommandLine.Help
         private const string Indent = "  ";
 
         private Dictionary<Symbol, Customization>? _customizationsBySymbol;
-        private Func<HelpContext, IEnumerable<HelpSectionDelegate>>? _getLayout;
+        private Func<HelpContext, IEnumerable<Action<HelpContext>>>? _getLayout;
 
         /// <param name="localizationResources">Resources used to localize the help output.</param>
         /// <param name="maxWidth">The maximum width in characters after which help output is wrapped.</param>
@@ -71,6 +71,8 @@ namespace System.CommandLine.Help
                     context.Output.WriteLine();
                 }
             }
+
+            // context.Output.WriteLine();
         }
 
         internal Action<HelpContext>? OnCustomize { get; set; }
@@ -101,7 +103,7 @@ namespace System.CommandLine.Help
         /// Customizes the help sections that will be displayed.
         /// </summary>
         /// <param name="getLayout">A delegate that returns the sections in the order in which they should be written.</param>
-        public void CustomizeLayout(Func<HelpContext, IEnumerable<HelpSectionDelegate>> getLayout)
+        public void CustomizeLayout(Func<HelpContext, IEnumerable<Action<HelpContext>>> getLayout)
         {
             _getLayout = getLayout ?? throw new ArgumentNullException(nameof(getLayout));
         }
@@ -123,22 +125,25 @@ namespace System.CommandLine.Help
                 {
                     if (!displayOptionTitle)
                     {
-                        displayOptionTitle = parentCommand.Options.Any(x => x.IsGlobal && !x.IsHidden);
+                        displayOptionTitle = parentCommand.HasOptions && parentCommand.Options.Any(x => x.IsGlobal && !x.IsHidden);
                     }
 
                     yield return parentCommand.Name;
 
-                    yield return FormatArgumentUsage(parentCommand.Arguments);
+                    if (parentCommand.HasArguments)
+                    {
+                        yield return FormatArgumentUsage(parentCommand.Arguments);
+                    }
                 }
 
-                var hasCommandWithHelp = command.Subcommands.Any(x => !x.IsHidden);
+                var hasCommandWithHelp = command.HasSubcommands && command.Subcommands.Any(x => !x.IsHidden);
 
                 if (hasCommandWithHelp)
                 {
                     yield return LocalizationResources.HelpUsageCommand();
                 }
 
-                displayOptionTitle = displayOptionTitle || command.Options.Any(x => !x.IsHidden);
+                displayOptionTitle = displayOptionTitle || (command.HasOptions && command.Options.Any(x => !x.IsHidden));
                 
                 if (displayOptionTitle)
                 {
@@ -268,7 +273,7 @@ namespace System.CommandLine.Help
             }
         }
 
-        private string FormatArgumentUsage(IReadOnlyList<Argument> arguments)
+        private string FormatArgumentUsage(IList<Argument> arguments)
         {
             var sb = StringBuilderPool.Default.Rent();
 
@@ -328,7 +333,7 @@ namespace System.CommandLine.Help
                 argument.Arity.MinimumNumberOfValues == 0;
         }
 
-        private IEnumerable<HelpSectionDelegate> GetLayout(HelpContext context)
+        private IEnumerable<Action<HelpContext>> GetLayout(HelpContext context)
         {
             if (_getLayout is null)
             {
@@ -461,7 +466,7 @@ namespace System.CommandLine.Help
 
             string GetSymbolDefaultValue(IdentifierSymbol symbol)
             {
-                IEnumerable<Argument> arguments = symbol.Arguments();
+                IList<Argument> arguments = symbol.Arguments();
                 var defaultArguments = arguments.Where(x => !x.IsHidden && x.HasDefaultValue).ToArray();
 
                 if (defaultArguments.Length == 0) return "";

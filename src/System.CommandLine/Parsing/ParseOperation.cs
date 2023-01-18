@@ -5,23 +5,21 @@ using System.Collections.Generic;
 
 namespace System.CommandLine.Parsing
 {
-    internal class ParseOperation
+    internal sealed class ParseOperation
     {
-        private readonly TokenizeResult _tokenizeResult;
+        private readonly List<Token> _tokens;
         private readonly CommandLineConfiguration _configuration;
         private int _index;
 
         public ParseOperation(
-            TokenizeResult tokenizeResult,
+            List<Token> tokens,
             CommandLineConfiguration configuration)
         {
-            _tokenizeResult = tokenizeResult;
+            _tokens = tokens;
             _configuration = configuration;
         }
 
-        private Token CurrentToken => _tokenizeResult.Tokens[_index];
-
-        public List<ParseError> Errors { get; } = new();
+        private Token CurrentToken => _tokens[_index];
 
         public CommandNode? RootCommandNode { get; private set; }
 
@@ -31,8 +29,8 @@ namespace System.CommandLine.Parsing
 
         private bool More(out TokenType currentTokenType)
         {
-            bool result = _index < _tokenizeResult.Tokens.Count;
-            currentTokenType = result ? _tokenizeResult.Tokens[_index].Type : (TokenType)(-1);
+            bool result = _index < _tokens.Count;
+            currentTokenType = result ? _tokens[_index].Type : (TokenType)(-1);
             return result;
         }
 
@@ -45,8 +43,7 @@ namespace System.CommandLine.Parsing
         {
             var rootCommandNode = new CommandNode(
                 CurrentToken,
-                _configuration.RootCommand,
-                null);
+                _configuration.RootCommand);
 
             Advance();
 
@@ -59,7 +56,7 @@ namespace System.CommandLine.Parsing
 
         private void ParseSubcommand(CommandNode parentNode)
         {
-            var commandNode = new CommandNode(CurrentToken, (Command)CurrentToken.Symbol!, parentNode);
+            var commandNode = new CommandNode(CurrentToken, (Command)CurrentToken.Symbol!);
 
             Advance();
 
@@ -99,7 +96,7 @@ namespace System.CommandLine.Parsing
         {
             while (More(out TokenType currentTokenType) && currentTokenType == TokenType.Argument)
             {
-                while (currentArgumentIndex < commandNode.Command.Arguments.Count)
+                while (commandNode.Command.HasArguments && currentArgumentIndex < commandNode.Command.Arguments.Count)
                 {
                     Argument argument = commandNode.Command.Arguments[currentArgumentIndex];
 
@@ -137,8 +134,7 @@ namespace System.CommandLine.Parsing
         {
             OptionNode optionNode = new(
                 CurrentToken,
-                (Option)CurrentToken.Symbol!,
-                parent);
+                (Option)CurrentToken.Symbol!);
 
             Advance();
 
@@ -202,18 +198,16 @@ namespace System.CommandLine.Parsing
             void ParseDirective(CommandNode parent)
             {
                 var token = CurrentToken;
-                var withoutBrackets = token.Value.Substring(1, token.Value.Length - 2);
-                var keyAndValue = withoutBrackets.Split(new[]
-                {
-                    ':'
-                }, 2);
+                ReadOnlySpan<char> withoutBrackets = token.Value.AsSpan(1, token.Value.Length - 2);
+                int indexOfColon = withoutBrackets.IndexOf(':');
+                string key = indexOfColon >= 0 
+                    ? withoutBrackets.Slice(0, indexOfColon).ToString()
+                    : withoutBrackets.ToString();
+                string? value = indexOfColon > 0
+                    ? withoutBrackets.Slice(indexOfColon + 1).ToString()
+                    : null;
 
-                var key = keyAndValue[0];
-                var value = keyAndValue.Length == 2
-                                ? keyAndValue[1]
-                                : null;
-
-                var directiveNode = new DirectiveNode(token, parent, key, value);
+                var directiveNode = new DirectiveNode(token, key, value);
 
                 parent.AddChildNode(directiveNode);
 

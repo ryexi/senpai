@@ -1,94 +1,26 @@
-﻿using Senpai.Properties;
-
-namespace Senpai
+﻿namespace Senpai
 {
     /// <summary>
-    /// Represents an <see langword="option"/>.
+    /// Represents an <see langword="argument"/>.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = false)]
-    public sealed class OptionAttribute : Attribute, ISymbolAttribute
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
+    public sealed class OptionAttribute : SymbolAttribute
     {
-        private readonly string? description;
-        private readonly uint index;
-        private string? name;
-
-        /// <inheritdoc cref="OptionAttribute"/>
-        /// <param name="Id">The position of its parameter.</param>
-        /// <param name="Name">The name of the option.</param>
-        public OptionAttribute(uint Id, string Name)
+        public OptionAttribute(string name)
         {
-            if (string.IsNullOrWhiteSpace(name = Name))
-                throw new ArgumentNullException(nameof(Name));
-
-            index = Id;
+            this.Name = name;
         }
 
-        /// <inheritdoc cref="OptionAttribute(uint, string)"/>
-        /// <param name="Id"></param>
-        /// <param name="Name"></param>
-        /// <param name="Description">The description of the option.</param>
-        public OptionAttribute(uint Id, string Name, string? Description)
-        {
-            if (string.IsNullOrWhiteSpace(name = Name))
-                throw new ArgumentNullException(nameof(Name));
-
-            index = Id;
-            description = Description;
-        }
-
-        /// <summary>
-        /// A string that can be used on the command line to specify the option.
-        /// </summary>
-        /// <value></value>
         public string? Alias
         {
             get;
             set;
         }
 
-        /// <summary>
-        /// The set of strings that can be used on the command line to specify the option.
-        /// </summary>
         public string[]? Aliases
         {
             get;
             set;
-        }
-
-        /// <inheritdoc cref="ISymbolAttribute.Arity"/>
-        public ArgumentArity Arity
-        {
-            get;
-            set;
-        }
-
-        string? ISymbolAttribute.Description => description ?? Resources.COMMAND_NO_DESCRIPTION;
-
-        uint ISymbolAttribute.Index => index;
-
-        /// <inheritdoc cref="ISymbolAttribute.IsHidden"/>
-        public bool IsHidden
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Indicates whether the option is required when its parent command is invoked.
-        /// </summary>
-        /// <remarks>
-        /// When an option is required and its parent command is invoked without it, an error results
-        /// </remarks>
-        public bool IsRequired
-        {
-            get;
-            set;
-        }
-
-        string? ISymbolAttribute.Name
-        {
-            get => name;
-            set => name = value;
         }
     }
 }

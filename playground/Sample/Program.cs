@@ -1,12 +1,7 @@
-﻿using Senpai;
+﻿/*
+ * To view how a simple command works, check Commands\Hello.cs.
+ * To view how the command-hierarchy works, check Group\*
+ * To view  
+ */
 
-namespace Sample
-{
-    internal class Program
-    {
-        static void Main(string[] args)
-        {
-            App.Run(new(args));
-        }
-    }
-}
+return App.Run(args);

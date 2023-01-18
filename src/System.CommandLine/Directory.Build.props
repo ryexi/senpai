@@ -1,0 +1,12 @@
+<Project>
+
+  <PropertyGroup>
+    <Commit>9c48247db71bfbf7309ec48d87929a8fe425a64d</Commit>
+    <Version>2.0.0-beta4.22272.1+$(Commit)</Version>
+    <FileVersion>$(VersionPrefix)</FileVersion>
+    <AssemblyVersion>$(VersionPrefix)</AssemblyVersion>
+  </PropertyGroup>
+
+  <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
+
+</Project>

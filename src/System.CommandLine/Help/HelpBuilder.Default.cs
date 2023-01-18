@@ -64,11 +64,10 @@ public partial class HelpBuilder
             }
 
             string firstColumn;
-            var completions = (argument is { } a
-                                   ? a.GetCompletions()
-                                   : Array.Empty<CompletionItem>())
-                              .Select(item => item.Label)
-                              .ToArray();
+            var completions = argument
+                .GetCompletions(CompletionContext.Empty)
+                .Select(item => item.Label)
+                .ToArray();
 
             var arg = argument;
             var helpName = arg?.HelpName ?? string.Empty;
@@ -147,7 +146,7 @@ public partial class HelpBuilder
         /// <summary>
         /// Gets the default sections to be written for command line help.
         /// </summary>
-        public static IEnumerable<HelpSectionDelegate> GetLayout()
+        public static IEnumerable<Action<HelpContext>> GetLayout()
         {
             yield return SynopsisSection();
             yield return CommandUsageSection();
@@ -160,7 +159,7 @@ public partial class HelpBuilder
         /// <summary>
         /// Writes a help section describing a command's synopsis.
         /// </summary>
-        public static HelpSectionDelegate SynopsisSection() =>
+        public static Action<HelpContext> SynopsisSection() =>
             ctx =>
             {
                 ctx.HelpBuilder.WriteHeading(ctx.HelpBuilder.LocalizationResources.HelpDescriptionTitle(), ctx.Command.Description, ctx.Output);
@@ -169,7 +168,7 @@ public partial class HelpBuilder
         /// <summary>
         /// Writes a help section describing a command's usage.
         /// </summary>
-        public static HelpSectionDelegate CommandUsageSection() =>
+        public static Action<HelpContext> CommandUsageSection() =>
             ctx =>
             {
                 ctx.HelpBuilder.WriteHeading(ctx.HelpBuilder.LocalizationResources.HelpUsageTitle(), ctx.HelpBuilder.GetUsage(ctx.Command), ctx.Output);
@@ -178,7 +177,7 @@ public partial class HelpBuilder
         ///  <summary>
         /// Writes a help section describing a command's arguments.
         ///  </summary>
-        public static HelpSectionDelegate CommandArgumentsSection() =>
+        public static Action<HelpContext> CommandArgumentsSection() =>
             ctx =>
             {
                 TwoColumnHelpRow[] commandArguments = ctx.HelpBuilder.GetCommandArgumentRows(ctx.Command, ctx).ToArray();
@@ -200,23 +199,26 @@ public partial class HelpBuilder
         ///  <summary>
         /// Writes a help section describing a command's subcommands.
         ///  </summary>
-        public static HelpSectionDelegate SubcommandsSection() =>
+        public static Action<HelpContext> SubcommandsSection() =>
             ctx => ctx.HelpBuilder.WriteSubcommands(ctx);
 
         ///  <summary>
         /// Writes a help section describing a command's options.
         ///  </summary>
-        public static HelpSectionDelegate OptionsSection() =>
+        public static Action<HelpContext> OptionsSection() =>
             ctx =>
             {
                 // by making this logic more complex, we were able to get some nice perf wins elsewhere
                 List<TwoColumnHelpRow> options = new();
                 HashSet<Option> uniqueOptions = new();
-                foreach (Option option in ctx.Command.Options)
+                if (ctx.Command.HasOptions)
                 {
-                    if (!option.IsHidden && uniqueOptions.Add(option))
+                    foreach (Option option in ctx.Command.Options)
                     {
-                        options.Add(ctx.HelpBuilder.GetTwoColumnRow(option, ctx));
+                        if (!option.IsHidden && uniqueOptions.Add(option))
+                        {
+                            options.Add(ctx.HelpBuilder.GetTwoColumnRow(option, ctx));
+                        }
                     }
                 }
 
@@ -229,12 +231,15 @@ public partial class HelpBuilder
                     {
                         if ((parentCommand = parent.Symbol as Command) is not null)
                         {
-                            foreach (var option in parentCommand.Options)
+                            if (parentCommand.HasOptions)
                             {
-                                // global help aliases may be duplicated, we just ignore them
-                                if (option.IsGlobal && !option.IsHidden && uniqueOptions.Add(option))
+                                foreach (var option in parentCommand.Options)
                                 {
-                                    options.Add(ctx.HelpBuilder.GetTwoColumnRow(option, ctx));
+                                    // global help aliases may be duplicated, we just ignore them
+                                    if (option.IsGlobal && !option.IsHidden && uniqueOptions.Add(option))
+                                    {
+                                        options.Add(ctx.HelpBuilder.GetTwoColumnRow(option, ctx));
+                                    }
                                 }
                             }
 
@@ -257,12 +262,13 @@ public partial class HelpBuilder
 
                 ctx.HelpBuilder.WriteHeading(ctx.HelpBuilder.LocalizationResources.HelpOptionsTitle(), null, ctx.Output);
                 ctx.HelpBuilder.WriteColumns(options, ctx);
+                // ctx.Output.WriteLine();
             };
 
         ///  <summary>
         /// Writes a help section describing a command's additional arguments, typically shown only when <see cref="Command.TreatUnmatchedTokensAsErrors"/> is set to <see langword="true"/>.
         ///  </summary>
-        public static HelpSectionDelegate AdditionalArgumentsSection() =>
+        public static Action<HelpContext> AdditionalArgumentsSection() =>
             ctx => ctx.HelpBuilder.WriteAdditionalArguments(ctx);
     }
 }

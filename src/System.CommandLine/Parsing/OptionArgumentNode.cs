@@ -1,19 +1,18 @@
 ﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+using System.Diagnostics;
+
 namespace System.CommandLine.Parsing
 {
-    internal class OptionArgumentNode : SyntaxNode
+    internal sealed class OptionArgumentNode : SyntaxNode
     {
         public OptionArgumentNode(
             Token token,
             Argument argument,
-            OptionNode parent) : base(token, parent)
+            OptionNode parent) : base(token)
         {
-            if (token.Type != TokenType.Argument)
-            {
-                throw new ArgumentException($"Incorrect token type: {token}");
-            }
+            Debug.Assert(token.Type == TokenType.Argument, $"Incorrect token type: {token}");
 
             Argument = argument;
             ParentOptionNode = parent;

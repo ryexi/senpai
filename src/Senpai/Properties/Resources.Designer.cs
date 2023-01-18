@@ -61,20 +61,11 @@ namespace Senpai.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invoke.
-        /// </summary>
-        internal static string COMMAND_HANDLER_NAME {
-            get {
-                return ResourceManager.GetString("COMMAND_HANDLER_NAME", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to No description provided..
         /// </summary>
-        internal static string COMMAND_NO_DESCRIPTION {
+        internal static string SymbolNoDescriptionProvided {
             get {
-                return ResourceManager.GetString("COMMAND_NO_DESCRIPTION", resourceCulture);
+                return ResourceManager.GetString("SymbolNoDescriptionProvided", resourceCulture);
             }
         }
     }

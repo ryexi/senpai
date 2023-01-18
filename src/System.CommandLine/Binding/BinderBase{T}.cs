@@ -17,7 +17,7 @@ public abstract class BinderBase<T> :
 
     string IValueDescriptor.ValueName => GetType().Name;
 
-    Type IValueDescriptor.ValueType { get; set; } = typeof(T);
+    Type IValueDescriptor.ValueType => typeof(T);
 
     bool IValueDescriptor.HasDefaultValue => false;
 

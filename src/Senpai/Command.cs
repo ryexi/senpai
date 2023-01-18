@@ -1,130 +1,119 @@
 ﻿using System.CommandLine;
-using System.Reflection;
+using Senpai.Converters;
+using Senpai.Properties;
 
-namespace Senpai
+namespace Senpai;
+
+/// <summary>
+/// Represents a specific action that the application performs.
+/// </summary>
+public abstract class Command
 {
-    internal sealed class Command : System.CommandLine.Command
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Command"/> class.
+    /// </summary>
+    public Command()
     {
-        public new List<Argument>? Arguments
+        Properties ??= new SymbolAttribute
         {
-            get;
-            private set;
+            Name = Owner.Name.ToLower(),
+            Description = Resources.SymbolNoDescriptionProvided
+        };
+
+        UnderlyingCommand = new(Properties.Name,
+                                Properties.Synopsis,
+                                Properties.Description);
+
+        // Add arguments
+        foreach (var arg in Arguments = GetArgumentProperties())
+        {
+            UnderlyingCommand.Add(arg.Argument);
         }
 
-        public override string? Description
+        // Add options
+        foreach (var opt in Options = GetOptionProperties())
         {
-            get => base.Description;
-            set => base.Description = value;
+            UnderlyingCommand.Add(opt.Argument);
         }
 
-        public List<Argument>? Inheritance
+        // SetHandler
+        if (!IsAbsent)
         {
-            get;
-            private set;
-        }
-
-        public MethodInfo? Invoker
-        {
-            get;
-            set;
-        }
-
-        public override string Name
-        {
-            get => base.Name;
-            set => base.Name = value;
-        }
-
-        public new List<Option>? Options
-        {
-            get;
-            private set;
-        }
-
-        public Type? Reference
-        {
-            get;
-            set;
-        }
-
-        public new List<Command>? Subcommands
-        {
-            get;
-            set;
-        }
-
-        public override string? Synopsis
-        {
-            get => base.Synopsis;
-            set => base.Synopsis = value;
-        }
-
-        public void AddCommand(Command command)
-        {
-            (Subcommands ??= new()).Add(command);
-            base.AddCommand(command);
-        }
-
-        public void SetArguments(List<Command>? ancestors = null)
-        {
-            if (Invoker is null)
-                throw new NullReferenceException(nameof(Reference));
-
-            var parameters = Invoker.GetParameters();
-            var @arguments = Invoker.GetCustomAttributes(attributeType: typeof(ArgumentAttribute))
-                                    .Union(Invoker.GetCustomAttributes(attributeType: typeof(OptionAttribute)))
-                                    .OrderBy(a => ((ISymbolAttribute)a).Index)
-                                    .ToArray();
-            var sizeofArgs = (ancestors?[ancestors.Count - 1].Arguments?.Count ?? 0) + (ancestors?[ancestors.Count - 1].Inheritance?.Count ?? 0);
-
-            if (parameters.Length != (arguments.Length + sizeofArgs))
-                Internal.Throw(Reference!, "Length of parameters and arguments are not equal.");
-
-            #region Inheriting the args of the ancestors
-            // Inheriting the args of the ancestors.
-            for (int i = 0; i < ancestors?[ancestors.Count - 1].Inheritance?.Count; i++)
-                (Inheritance ??= new()).Add(ancestors![ancestors.Count - 1].Inheritance![i]);
-
-            for (int i = 0; i < ancestors?[ancestors.Count - 1].Arguments?.Count; i++)
-                (Inheritance ??= new()).Add(ancestors![ancestors.Count - 1].Arguments![i]);
-            #endregion
-
-            foreach (var argument in arguments)
-            {
-                ParameterInfo param;
-
-                try
-                {
-                    // TODO: Fix this shit or rewrite this.
-                    var index = ((ISymbolAttribute)argument).Index;
-                    param = parameters[index == 0 ? 0 : index - 1];
-                }
-                catch (IndexOutOfRangeException)
-                {
-                    Internal.Throw(Reference!, "Index correlation error.");
-                    throw;
-                }
-
-                if (argument is ArgumentAttribute arg)
-                    AddArgument(arg.ToArgument(param));
-
-                if (argument is OptionAttribute option)
-                    AddOption(option.ToOption(param));
-            }
-
-            this.SetHandler((context) => Invocation.Handle(this, context));
-        }
-
-        private void AddArgument(Argument argument)
-        {
-            (Arguments ??= new()).Add(argument);
-            base.AddArgument(argument);
-        }
-
-        private void AddOption(Option argument)
-        {
-            (Options ??= new()).Add(argument);
-            base.AddOption(argument);
+            UnderlyingCommand.SetHandler(
+                (context) => new InvocationHandler(this, context)
+            );
         }
     }
+
+    internal ArgumentProperty[]? Arguments
+    {
+        get;
+        set;
+    }
+
+    internal OptionProperty[]? Options
+    {
+        get;
+        set;
+    }
+
+    internal Type Owner => GetType();
+
+    internal object? ParentClass
+    {
+        get;
+        set;
+    }
+
+    internal InternalCommand UnderlyingCommand
+    {
+        get;
+        set;
+    }
+
+    /// <summary>
+    /// Determines whether the command should be invoked or not.
+    /// </summary>
+    protected virtual bool IsAbsent
+    {
+        get;
+        set;
+    }
+
+    /// <summary>
+    /// The properties of the <see cref="Command"/>.
+    /// </summary>
+    /// <remarks>
+    /// Override this property to change the name and the description of the <see cref="Command"/>.
+    /// </remarks>
+    protected virtual Symbol Properties
+    {
+        get;
+        set;
+    }
+
+    internal ArgumentProperty[] GetParentArguments()
+    {
+        if (ParentClass is null || ParentClass is not Command command)
+        {
+            return Array.Empty<ArgumentProperty>();
+        }
+
+        return command.GetParentArguments().Union(command.Arguments ?? Array.Empty<ArgumentProperty>()).ToArray();
+    }
+
+    internal int Invoke(object?[] args) => Invocation(args);
+
+    /// <summary>
+    /// This method serves as the starting point for <see cref="Command"/> execution.
+    /// </summary>
+    /// <param name="args">The arguments passed to the parent <see cref="Command"/> and its predecessors.</param>
+    /// <returns>
+    /// The exit-code of the invocation.
+    /// </returns>
+    protected abstract int Invocation(object?[] args);
+
+    private ArgumentProperty[] GetArgumentProperties() => ArgumentConverter.Convert(Owner.GetProperties());
+
+    private OptionProperty[] GetOptionProperties() => OptionConverter.Convert(Owner.GetProperties());
 }

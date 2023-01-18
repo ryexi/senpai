@@ -1,11 +1,10 @@
 ﻿<Project>
 
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
-    <Optimize>true</Optimize>
-    <DebugType>embedded</DebugType>
-    <DebugSymbols>true</DebugSymbols>
+
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <AssemblyName>senpai</AssemblyName>
+    <MSBuildWarningsAsMessages>$(MSBuildWarningsAsMessages);MSB4011</MSBuildWarningsAsMessages>
+
   </PropertyGroup>
 
 </Project>

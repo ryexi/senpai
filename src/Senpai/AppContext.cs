@@ -3,7 +3,7 @@
 namespace Senpai
 {
     /// <summary>
-    /// Represents the context used by <see cref="App.Run(AppContext)"/>.
+    /// Represents a context used by the interpreter.
     /// </summary>
     public sealed class AppContext
     {
@@ -27,14 +27,18 @@ namespace Senpai
         /// <param name="description">A description of the application.</param>
         public AppContext(string[] args, string? description)
         {
-            Arguments   = args;
+            Arguments = args;
             Description = description;
         }
 
         /// <summary>
         /// The arguments to process.
         /// </summary>
-        public string[] Arguments { get; set; }
+        public string[] Arguments
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         /// The <see cref="System.Reflection.Assembly"/> which contains the attributed classes.
@@ -54,6 +58,10 @@ namespace Senpai
         /// <summary>
         /// A description of the application.
         /// </summary>
-        public string? Description { get; set; }
+        public string? Description
+        {
+            get;
+            set;
+        }
     }
 }

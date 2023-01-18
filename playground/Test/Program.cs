@@ -15,9 +15,9 @@ namespace Test
                 => Console.WriteLine("\nTime elapsed: {0} ms", sw?.ElapsedMilliseconds);
         }
 
-        static void Main(string[] args)
+        static int Main(string[] args)
         {
-            App.Run(new(args));
+            return App.Run(args);
         }
     }
 }
