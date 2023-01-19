@@ -40,6 +40,8 @@ public abstract class Command
         set;
     }
 
+    internal string DefaultName => Owner.Name.ToLower().ToLower();
+
     internal OptionProperty[]? Options
     {
         get;
@@ -47,8 +49,6 @@ public abstract class Command
     }
 
     internal Type Owner => GetType();
-
-    internal string DefaultName => Owner.Name.ToLower().ToLower();
 
     internal object? ParentClass
     {
@@ -61,11 +61,6 @@ public abstract class Command
         get;
         set;
     }
-
-    /// <summary>
-    /// Gets or sets a value indicating whether the command is executable or not.
-    /// </summary>
-    protected virtual bool HasHandler => true;
 
     /// <summary>
     /// The properties of the <see cref="Command">command</see>.
@@ -94,7 +89,21 @@ public abstract class Command
     /// </summary>
     /// <param name="args">The <see cref="ArgumentAttribute">arguments</see> that were passed to the parent <see cref="Command">command</see> and its predecessors.
     /// </param>
-    protected internal abstract void Invocation(object?[] args);
+    protected internal virtual void Invocation(object?[] args) {}
+
+    /// <summary>
+    /// Gets or sets a value indicating whether the command is executable or not.
+    /// </summary>
+    private bool HasHandler
+    {
+        get
+        {
+            var method = Invocation;
+            var methodInfo = method.Method;
+
+            return methodInfo.GetBaseDefinition().DeclaringType != methodInfo.DeclaringType;
+        }
+    }
 
     private ArgumentProperty[] GetArgumentProperties() => ArgumentConverter.Convert(Owner.GetProperties());
 
