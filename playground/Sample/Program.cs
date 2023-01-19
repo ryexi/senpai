@@ -4,4 +4,4 @@
  * To view  
  */
 
-return App.Run(args);
+App.Run(args);
