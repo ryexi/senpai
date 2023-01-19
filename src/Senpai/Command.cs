@@ -1,5 +1,4 @@
-﻿using Senpai.Converter;
-using Senpai.Invocation;
+﻿using Senpai.Parsing;
 using Senpai.Properties;
 
 namespace Senpai;
@@ -14,15 +13,7 @@ public abstract class Command
     /// </summary>
     public Command()
     {
-        Properties ??= new()
-        {
-            Name = Owner.Name.ToLower(),
-            Description = Resources.SymbolNoDescriptionProvided
-        };
-
-        UnderlyingCommand = new(Properties.Name,
-                                Properties.Synopsis,
-                                Properties.Description);
+        UnderlyingCommand = CommandConverter.Create(this);
 
         // Add arguments
         foreach (var arg in Arguments = GetArgumentProperties())
@@ -57,6 +48,8 @@ public abstract class Command
 
     internal Type Owner => GetType();
 
+    internal string DefaultName => Owner.Name.ToLower().ToLower();
+
     internal object? ParentClass
     {
         get;
@@ -75,16 +68,16 @@ public abstract class Command
     protected virtual bool HasHandler => true;
 
     /// <summary>
-    /// The properties of the <see cref="Command"/>.
+    /// The properties of the <see cref="Command">command</see>.
     /// </summary>
     /// <remarks>
     /// Override this property to change the name and the description of the <see cref="Command">command</see>.
     /// </remarks>
-    protected virtual CommandProperty Properties
+    protected internal virtual CommandProperty Properties => new()
     {
-        get;
-        set;
-    }
+        Name = DefaultName,
+        Description = Resources.SymbolNoDescriptionProvided
+    };
 
     internal ArgumentProperty[] GetParentArguments()
     {

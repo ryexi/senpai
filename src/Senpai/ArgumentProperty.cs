@@ -3,29 +3,17 @@ using System.Reflection;
 
 namespace Senpai
 {
-    internal sealed class ArgumentProperty
+    internal sealed class ArgumentProperty : SymbolProperty<ArgumentAttribute>
     {
-        public ArgumentProperty(PropertyInfo prop)
+        public ArgumentProperty(PropertyInfo prop, ArgumentAttribute attribute, Argument symbol)
         {
-            Property = prop;
-            Symbol = (prop.GetCustomAttribute(typeof(ArgumentAttribute)) as ArgumentAttribute).ShouldNotBeNull();
-            Position = (int)Symbol.Index;
-            Argument = Create(prop, Symbol);
+            Argument  = symbol;
+            Attribute = attribute;
+            Property  = prop;
+            Position  = (int)Attribute.Index;
         }
 
         public Argument Argument
-        {
-            get;
-            set;
-        }
-
-        public PropertyInfo Property
-        {
-            get;
-            set;
-        }
-
-        public ArgumentAttribute Symbol
         {
             get;
             set;
@@ -37,16 +25,16 @@ namespace Senpai
             private set;
         }
 
-        private static Argument Create(PropertyInfo prop, ArgumentAttribute symbol)
+        public PropertyInfo Property
         {
-            var propType = typeof(Argument<>).MakeGenericType(prop.PropertyType);
-            var instance = (Activator.CreateInstance(propType, new object[] { symbol.Name, symbol.Description }) as Argument)!;
+            get;
+            set;
+        }
 
-            instance.Arity    = symbol.Arity.ConvertTo();
-            instance.IsHidden = symbol.IsHidden;
-            instance.HelpName = symbol.HelpName;
-
-            return instance;
+        public ArgumentAttribute Attribute
+        {
+            get;
+            set;
         }
     }
 }

@@ -8,8 +8,13 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="ArgumentAttribute"/> class.
         /// </summary>
-        public ArgumentAttribute(uint id, string name) 
-        { 
+        public ArgumentAttribute(uint id)
+        {
+            this.Index = id;
+        }
+
+        public ArgumentAttribute(uint id, string name)
+        {
             this.Index = id;
             this.Name = name;
         }

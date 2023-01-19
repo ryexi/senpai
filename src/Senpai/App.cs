@@ -14,14 +14,6 @@ namespace Senpai
         /// <summary>
         /// Initialize and start the command-line interpreter.
         /// </summary>
-        public static void Run(string[] args) => Run(new AppContext(args)
-        {
-            Assembly = Assembly.GetCallingAssembly()
-        });
-
-        /// <summary>
-        /// Initialize and start the command-line interpreter.
-        /// </summary>
         /// <param name="context">Configure the behavior of the interpreter.</param>
         public static void Run(AppContext context)
         {
