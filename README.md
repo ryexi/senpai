@@ -1,5 +1,5 @@
 # Senpai [![NuGet Badge](https://buildstats.info/nuget/senpai)](https://www.nuget.org/packages/senpai)
- Yet another command-line interpreter.
+ A simple command-line interpreter for .NET.
 
  ## Documentation
   * [Wikipedia](https://github.com/imdying/senpai/wiki/Senpai)

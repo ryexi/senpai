@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.0.0-alpha.1] - 2023-01-19
+ Goodbye attributes. This version brings a new concept.
+ 
+ Check the [wiki](https://github.com/imdying/senpai/wiki/Senpai) and the sample to see what has changed.
+
 ## [2.0.0] - 2022-11-05
  Major changes internally and some renamings.
 

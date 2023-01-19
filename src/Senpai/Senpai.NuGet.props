@@ -4,12 +4,12 @@
     <PackageId>Senpai</PackageId>
     <Authors>$(Company)</Authors>
     <PackageVersion>$(Version)</PackageVersion>
-    <Description>A declarative command-line interpreter.</Description>
+    <Description>A simple command-line interpreter.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <RepositoryUrl>https://github.com/imdying/senpai</RepositoryUrl>
     <PackageReleaseNotes>The changelog can be found at https://github.com/imdying/senpai/blob/main/CHANGELOG.md</PackageReleaseNotes>
-    <PackageTags>cli;cmd;command;commandline;interpreter;processor;parser;handler;</PackageTags>
+    <PackageTags>cmd;command;cli;console;terminal;shell;commandline;interpreter;processor;parser;handler;</PackageTags>
     <PackageReadmeFile>\README.md</PackageReadmeFile>
   </PropertyGroup>
 
