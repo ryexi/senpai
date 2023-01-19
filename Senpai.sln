@@ -14,6 +14,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build Items", "Build Items", "{192244EB-FD41-4C9A-839E-09DFDAD35E4F}"
 	ProjectSection(SolutionItems) = preProject
 		build.jsonc = build.jsonc
+		build.ps1 = build.ps1
 		Directory.Build.props = Directory.Build.props
 	EndProjectSection
 EndProject
