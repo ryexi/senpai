@@ -2,7 +2,7 @@
 {
     public sealed class Greetings : Command
     {
-        [Argument(1, "Name")]
+        [Argument(1)]
         public string? Name
         {
             get;
