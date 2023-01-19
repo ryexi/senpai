@@ -1,9 +1,5 @@
 <Project>
 
-  <PropertyGroup>
-    <IsPackable>false</IsPackable>
-  </PropertyGroup>
-
   <Import Project="generic\Sdk.props" />
 
 </Project>
