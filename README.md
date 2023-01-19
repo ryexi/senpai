@@ -1,4 +1,4 @@
-# Senpai [![NuGet Badge](https://buildstats.info/nuget/senpai)](https://www.nuget.org/packages/senpai)
+# Senpai [![NuGet Badge](https://buildstats.info/nuget/senpai?includePreReleases=true)](https://www.nuget.org/packages/senpai)
  A simple command-line interpreter for .NET.
 
  ## Documentation
