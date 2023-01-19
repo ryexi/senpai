@@ -2,7 +2,7 @@
 
 namespace Senpai;
 
-public static class Extensions
+internal static class Extensions
 {
     [DebuggerStepThrough]
     public static T ShouldNotBeNull<T>(this T? obj)
