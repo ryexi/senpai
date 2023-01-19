@@ -4,10 +4,9 @@
     {
         public sealed class Sub : Command
         {
-            protected override int Invocation(object?[] args)
+            protected override void Invocation(object?[] args)
             {
                 Console.WriteLine("A sub command of a command.");
-                return 0;
             }
         }
     }

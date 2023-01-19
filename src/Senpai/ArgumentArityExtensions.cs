@@ -2,15 +2,15 @@
 
 internal static class ArgumentArityExtensions
 {
-    public static System.CommandLine.ArgumentArity ConvertTo(this ArgumentArity arity)
+    public static InternalArgumentArity ConvertTo(this ArgumentArity arity)
     {
         return arity switch
         {
-            ArgumentArity.Zero => System.CommandLine.ArgumentArity.Zero,
-            ArgumentArity.ZeroOrOne => System.CommandLine.ArgumentArity.ZeroOrOne,
-            ArgumentArity.ExactlyOne => System.CommandLine.ArgumentArity.ExactlyOne,
-            ArgumentArity.ZeroOrMore => System.CommandLine.ArgumentArity.ZeroOrMore,
-            ArgumentArity.OneOrMore => System.CommandLine.ArgumentArity.OneOrMore,
+            ArgumentArity.Zero       => InternalArgumentArity.Zero,
+            ArgumentArity.ZeroOrOne  => InternalArgumentArity.ZeroOrOne,
+            ArgumentArity.ExactlyOne => InternalArgumentArity.ExactlyOne,
+            ArgumentArity.ZeroOrMore => InternalArgumentArity.ZeroOrMore,
+            ArgumentArity.OneOrMore  => InternalArgumentArity.OneOrMore,
             _ => default,
         };
     }

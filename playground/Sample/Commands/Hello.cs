@@ -2,10 +2,9 @@
 {
     public sealed class Hello : Command
     {
-        protected override int Invocation(object?[] args)
+        protected override void Invocation(object?[] args)
         {
             Console.WriteLine("Hello World");
-            return 0;
         }
     }
 }

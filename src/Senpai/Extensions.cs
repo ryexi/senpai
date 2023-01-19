@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace System;
+namespace Senpai;
 
 public static class Extensions
 {

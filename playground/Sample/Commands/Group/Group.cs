@@ -2,9 +2,9 @@
 {
     public sealed partial class Group : Command
     {
-        protected override bool IsAbsent => true;
+        protected override bool HasHandler => false;
 
-        protected override int Invocation(object?[] args)
+        protected override void Invocation(object?[] args)
         {
             throw new NotImplementedException();
         }

@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Senpai.Converters;
+namespace Senpai.Converter;
 
 internal sealed class ArgumentConverter
 {

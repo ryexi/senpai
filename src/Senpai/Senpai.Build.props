@@ -3,7 +3,6 @@
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
 
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <MSBuildWarningsAsMessages>$(MSBuildWarningsAsMessages);MSB4011</MSBuildWarningsAsMessages>
 
   </PropertyGroup>
 

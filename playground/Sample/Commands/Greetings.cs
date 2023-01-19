@@ -9,10 +9,9 @@
             set;
         }
 
-        protected override int Invocation(object?[] args)
+        protected override void Invocation(object?[] args)
         {
             Console.WriteLine("Greetings, {0}.", Name);
-            return 0;
         }
     }
 }

@@ -25,14 +25,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample", "playground\Sample
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Senpai", "src\Senpai\Senpai.csproj", "{EBF7C56D-3A9E-46E9-BC94-D4D9006A14B0}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Senpai.Test", "src\Senpai.Test\Senpai.Test.csproj", "{308813FC-6C90-4489-84D7-2DD2869269FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{88F1ECF2-2F9B-4840-A0C3-941B177A9375}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{88F1ECF2-2F9B-4840-A0C3-941B177A9375}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1767628C-4BF4-42B7-965F-703A6FD05A60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1767628C-4BF4-42B7-965F-703A6FD05A60}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1767628C-4BF4-42B7-965F-703A6FD05A60}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,6 +45,10 @@ Global
 		{EBF7C56D-3A9E-46E9-BC94-D4D9006A14B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EBF7C56D-3A9E-46E9-BC94-D4D9006A14B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EBF7C56D-3A9E-46E9-BC94-D4D9006A14B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{308813FC-6C90-4489-84D7-2DD2869269FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{308813FC-6C90-4489-84D7-2DD2869269FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{308813FC-6C90-4489-84D7-2DD2869269FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{308813FC-6C90-4489-84D7-2DD2869269FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

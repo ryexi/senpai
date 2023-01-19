@@ -14,7 +14,7 @@ namespace Senpai
         /// <summary>
         /// Initialize and start the command-line interpreter.
         /// </summary>
-        public static int Run(string[] args) => Run(new AppContext(args)
+        public static void Run(string[] args) => Run(new AppContext(args)
         {
             Assembly = Assembly.GetCallingAssembly()
         });
@@ -23,7 +23,7 @@ namespace Senpai
         /// Initialize and start the command-line interpreter.
         /// </summary>
         /// <param name="context">Configure the behavior of the interpreter.</param>
-        public static int Run(AppContext context)
+        public static void Run(AppContext context)
         {
             if (context is null)
                 throw new ArgumentNullException(nameof(context));
@@ -41,7 +41,7 @@ namespace Senpai
                 _root.Add(cmd);
             }
 
-            return _root.Invoke(context.Arguments!);
+            _ = _root.Invoke(context.Arguments!);
         }
     }
 }
