@@ -8,11 +8,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 		.gitignore = .gitignore
 		CHANGELOG.md = CHANGELOG.md
+		NOTICE.txt = NOTICE.txt
 		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build Items", "Build Items", "{192244EB-FD41-4C9A-839E-09DFDAD35E4F}"
 	ProjectSection(SolutionItems) = preProject
+		.runsettings = .runsettings
 		build.jsonc = build.jsonc
 		build.ps1 = build.ps1
 		Directory.Build.props = Directory.Build.props
@@ -28,7 +30,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Senpai", "src\Senpai\Senpai
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Playground", "Playground", "{602D641D-19C7-4397-B48B-B41B037108B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing", "playground\Testing\Testing.csproj", "{227F2158-DCE1-4B1E-8ADF-FFEC260FCE8F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Senpai.Test", "src\Senpai.Test\Senpai.Test.csproj", "{CE447A8C-E48C-4D48-8E80-5E4B756091E6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,10 +50,10 @@ Global
 		{EBF7C56D-3A9E-46E9-BC94-D4D9006A14B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EBF7C56D-3A9E-46E9-BC94-D4D9006A14B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EBF7C56D-3A9E-46E9-BC94-D4D9006A14B0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{227F2158-DCE1-4B1E-8ADF-FFEC260FCE8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{227F2158-DCE1-4B1E-8ADF-FFEC260FCE8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{227F2158-DCE1-4B1E-8ADF-FFEC260FCE8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{227F2158-DCE1-4B1E-8ADF-FFEC260FCE8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE447A8C-E48C-4D48-8E80-5E4B756091E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE447A8C-E48C-4D48-8E80-5E4B756091E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE447A8C-E48C-4D48-8E80-5E4B756091E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE447A8C-E48C-4D48-8E80-5E4B756091E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,7 +61,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{88F1ECF2-2F9B-4840-A0C3-941B177A9375} = {192244EB-FD41-4C9A-839E-09DFDAD35E4F}
 		{63113F8C-9EFF-40BB-921F-A8C6E0DA8CB9} = {602D641D-19C7-4397-B48B-B41B037108B7}
-		{227F2158-DCE1-4B1E-8ADF-FFEC260FCE8F} = {602D641D-19C7-4397-B48B-B41B037108B7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0A6238DB-434C-422E-B3A3-0FA764033991}

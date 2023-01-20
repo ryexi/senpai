@@ -33,7 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <InternalsVisibleTo Include="Testing" />
+    <InternalsVisibleTo Include="Senpai.Test" />
   </ItemGroup>
 
   <Import Project="Senpai.Build.Props" />

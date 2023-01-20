@@ -12,7 +12,7 @@ public sealed class Exit : Command
         set;
     }
 
-    protected override void Invocation(object?[] args)
+    protected internal override void Invocation(object?[] args)
     {
         Environment.Exit(Code);
     }

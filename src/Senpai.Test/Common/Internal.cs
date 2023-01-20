@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
-namespace Testing;
+namespace Senpai.Test;
 
 internal static class Internal
 {
