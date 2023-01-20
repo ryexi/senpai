@@ -18,6 +18,13 @@ Echo @("Date    $(Get-Date)"
        "Building...`n");
 
 # Content of the build script:
+
+dotnet test "$Project";
+
+if ($LASTEXITCODE -ne 0) {
+    throw;
+}
+
 dotnet pack @("$Project"
               "/p:Version=$BuildVersion"
               '/p:Configuration=Release'
