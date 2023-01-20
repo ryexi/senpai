@@ -10,5 +10,6 @@
   </PropertyGroup>
   
   <Import Project="common\Tools.props"/>
+  <Import Project="Build.props"/>
 
 </Project>

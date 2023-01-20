@@ -4,6 +4,6 @@ public sealed class Crash : Command
 {
     protected override void Invocation(object?[] args)
     {
-        throw new NotImplementedException();
+        throw new Exception();
     }
 }
