@@ -5,12 +5,11 @@ namespace Senpai.Invocation;
 internal sealed class CommandHandler
 {
     private CommandHandlerContext _context;
-    private SafeThread _thread;
+    private Threading? _thread;
 
     public CommandHandler(CommandHandlerContext context)
     {
         _context = context;
-        _thread = new SafeThread(Initialize);
     }
 
     public int ExitCode
@@ -19,17 +18,22 @@ internal sealed class CommandHandler
         set => _context.InvocationContext.ExitCode = value;
     }
 
-    public void Invoke(object?[] args)
+    public void Invoke()
     {
-        try
+        _thread = new Threading(() =>
         {
-            _context.CommandContext.Invocation(args);
-        }
-        catch (Exception)
-        {
-            ExitCode = -1;
-            throw;
-        }
+            try
+            {
+                _context.CommandContext.Invocation(
+                    InitializeAndGetArguments()
+                );
+            }
+            catch (Exception)
+            {
+                ExitCode = -1;
+                throw;
+            }
+        });
     }
 
     internal static void SetValue(object target, PropertyInfo prop, object? value)
@@ -80,11 +84,7 @@ internal sealed class CommandHandler
         return false;
     }
 
-    /// <summary>
-    /// While in the context of <see cref="System.CommandLine"/>, codes running here is considered as the command's execution codes, 
-    /// but, in the context of <see cref="Senpai"/>, codes running here should be considered as pre-execution codes until <see cref="Invoke(object?[])"/> is actually invoked.
-    /// </summary>
-    private void Initialize()
+    private object?[] InitializeAndGetArguments()
     {
         var context = _context.InvocationContext;
         var command = _context.CommandContext;
@@ -107,6 +107,6 @@ internal sealed class CommandHandler
             SetValue(command, arg.Property, context.ParseResult.GetValue(arg.Argument));
         }
 
-        this.Invoke(@params.ToArray());
+        return @params.ToArray();
     }
 }
