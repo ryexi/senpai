@@ -1,5 +1,4 @@
 ﻿using System.CommandLine;
-using System.Reflection;
 using Senpai.Properties;
 
 namespace Senpai
@@ -28,7 +27,7 @@ namespace Senpai
 
             _root = new RootCommand(context.Description ?? Resources.SymbolNoDescriptionProvided);
 
-            foreach ( var cmd in Services.GetCommands(context))
+            foreach (var cmd in Services.GetCommands(context))
             {
                 _root.Add(cmd);
             }
