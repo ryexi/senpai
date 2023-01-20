@@ -19,7 +19,9 @@ Echo @("Date    $(Get-Date)"
 
 # Content of the build script:
 
-dotnet test "$Project";
+dotnet test @("$Project"
+              '-s'
+              './.runsettings');
 
 if ($LASTEXITCODE -ne 0) {
     throw;

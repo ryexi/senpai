@@ -32,8 +32,8 @@
     </EmbeddedResource>
   </ItemGroup>
 
-  <ItemGroup>
-    <InternalsVisibleTo Include="Senpai.Test" />
+  <ItemGroup Condition="'$(Configuration)' == 'Debug'">
+    <InternalsVisibleTo Include="Test" />
   </ItemGroup>
 
   <Import Project="Senpai.Build.Props" />
