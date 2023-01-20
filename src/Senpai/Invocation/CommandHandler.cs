@@ -32,6 +32,54 @@ internal sealed class CommandHandler
         }
     }
 
+    internal static void SetValue(object target, PropertyInfo prop, object? value)
+    {
+        if (prop is null)
+        {
+            throw new InvalidOperationException(
+                $"{nameof(prop)} shouldn't be null here."
+            );
+        }
+
+        if (!prop.CanWrite)
+        {
+            throw new InvalidOperationException(
+                $"Cannot write to property at '{prop.DeclaringType}.{prop.Name}'."
+            );
+        }
+        else
+        {
+            if (value != null && !IsValid(prop.PropertyType, value.GetType()))
+            {
+                throw new InvalidCastException(
+                    $"The value being set doesn't match its property's type. Cannot convert '{prop.PropertyType}' to '{value.GetType()}'."
+                );
+            }
+
+            //if (value == null && Nullable.GetUnderlyingType(prop.PropertyType) == null)
+            //{
+            //}
+        }
+
+        prop.SetValue(target, value);
+    }
+
+    private static bool IsNullable(Type type, out Type? baseType) => (baseType = Nullable.GetUnderlyingType(type)) != null;
+
+    /// <summary>
+    /// Returns <see langword="false"/> if the validation fails.
+    /// </summary>
+    private static bool IsValid(Type source, Type target)
+    {
+        if (IsNullable(source, out var underlyingType) && underlyingType == target)
+            return true;
+
+        if (source == target)
+            return true;
+
+        return false;
+    }
+
     /// <summary>
     /// While in the context of <see cref="System.CommandLine"/>, codes running here is considered as the command's execution codes, 
     /// but, in the context of <see cref="Senpai"/>, codes running here should be considered as pre-execution codes until <see cref="Invoke(object?[])"/> is actually invoked.
@@ -60,16 +108,5 @@ internal sealed class CommandHandler
         }
 
         this.Invoke(@params.ToArray());
-    }
-
-    private void SetValue(object target, PropertyInfo prop, object? value)
-    {
-        if (value is null)
-            throw new ArgumentNullException(nameof(value));
-
-        if (!prop.CanWrite)
-            throw new Exception($"Property '{prop.DeclaringType}.{prop.Name}' cannot be written to.");
-
-        prop.SetValue(target, value);
     }
 }
