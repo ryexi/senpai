@@ -1,0 +1,3 @@
+[submodule "src/Senpai.CLI"]
+	path = src/Senpai.CLI
+	url = https://github.com/imdying/senpai-cli.git

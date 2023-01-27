@@ -65,7 +65,10 @@ internal sealed class CommandHandler
             //}
         }
 
-        prop.SetValue(target, value);
+        // The default value of the property is preserved if
+        // 'value' is null.
+        if (value != null)
+            prop.SetValue(target, value);
     }
 
     private static bool IsNullable(Type type, out Type? baseType) => (baseType = Nullable.GetUnderlyingType(type)) != null;

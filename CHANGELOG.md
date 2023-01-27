@@ -4,6 +4,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.0.0-preview.1] - 2023-01-27
+
+ ### Added
+ - Added new methods for `App`
+   - `WriteLine`
+   - `WriteError`
+   - `WriteWarning` and more.
+
+ ### Changed
+  - Re-opened `Run(...)`. Return type has been changed from `void` to `int`. It now returns the exit-code.
+  - Added period (.) in the description of `--help` and `--version`.
+
+ ### Fixed
+  - Properties with a default value will not be overriden anymore.
+
 ## [3.0.0-alpha.2] - 2023-01-20
  ### Added
   * Added a new constructor for `Option`.

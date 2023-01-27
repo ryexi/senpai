@@ -5,7 +5,8 @@ public sealed class Exit : Command
     [Argument(
         1, 
         "Code", 
-        "The exit code to return.")]
+        "The exit code to return.",
+        Arity = ArgumentArity.ZeroOrOne)]
     public int Code
     {
         get;

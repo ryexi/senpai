@@ -1,4 +1,5 @@
 ﻿using Senpai.Invocation;
+using Senpai.Test.Commands;
 
 namespace Senpai.Test.Units;
 
@@ -11,41 +12,48 @@ public class Class_Property_SetValue
         set;
     }
 
-    public string? PropNotWritable
+    public string? Prop_Should_Not_Be_Written_To
     {
         get;
     }
 
+    public string? Prop_Has_Default_Value { get; set; } = nameof(Prop_Has_Default_Value);
+
     [TestMethod]
     public void Prop_Should_Be_Null()
     {
-        // Property should be null.
         SetValue(nameof(Prop), null);
         Assert.AreEqual(null, Prop);
     }
 
     [TestMethod]
+    public void Prop_Should_Have_Default_Value()
+    {
+        SetValue(nameof(Prop_Has_Default_Value), null);
+        Assert.AreEqual(nameof(Prop_Has_Default_Value), Prop_Has_Default_Value);
+    }
+
+    [TestMethod]
     public void Prop_Should_Have_Value()
     {
-        // Property should have a value.
-        SetValue(nameof(Prop), 999);
-        Assert.AreEqual(999, Prop);
+        const int value = 777;
+
+        SetValue(nameof(Prop), value);
+        Assert.AreEqual(value, Prop);
     }
 
     [TestMethod]
     public void Should_Throw_If_A_Bad_Value_Is_Set_To_Prop()
     {
-        // Writing a diff value type.
         Assert.ThrowsException<InvalidCastException>(() => SetValue(nameof(Prop), new object()));
     }
 
     [TestMethod]
-    public void Should_Throw_If_PropNotWritable_Is_Written_To()
+    public void Should_Throw_If_Get_Setter_Only_Is_Written_To()
     {
-        // Writing to a closed prop.
-        Assert.ThrowsException<InvalidOperationException>(() => SetValue(nameof(PropNotWritable), null));
+        Assert.ThrowsException<InvalidOperationException>(() => SetValue(nameof(Prop_Should_Not_Be_Written_To), null));
     }
 
-    private void SetValue(string propName, object? value) 
+    private void SetValue(string propName, object? value)
         => CommandHandler.SetValue(this, GetType().GetProperty(propName)!, value);
 }

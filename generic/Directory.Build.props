@@ -1,8 +1,0 @@
-<Project>
-
-  <ItemGroup>
-    <None Include="$(MSBuildThisFileDirectory)\**\*" />
-    <None Remove="$(MSBuildThisFileDirectory)\Generic.shproj" />
-  </ItemGroup>
-
-</Project>

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
 
@@ -6,37 +6,25 @@
     <LangVersion>preview</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <MSBuildWarningsAsMessages>$(MSBuildWarningsAsMessages);MSB4011</MSBuildWarningsAsMessages>
 
   </PropertyGroup>
 
   <ItemGroup>
 
-    <ProjectReference Include="..\System.CommandLine\System.CommandLine.csproj" PrivateAssets="all" />
-    <PackageReference Include="Teronis.MSBuild.Packaging.ProjectBuildInPackage" Version="1.0.0" PrivateAssets="all" />
+    <ProjectReference Include="..\Senpai.CLI\src\System.CommandLine\System.CommandLine.csproj">
+      <PrivateAssets>all</PrivateAssets>
+    </ProjectReference>
+    <PackageReference Include="Teronis.MSBuild.Packaging.ProjectBuildInPackage" Version="1.0.0">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
 
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Properties\Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Update="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup Condition="'$(Configuration)' == 'Debug'">
-    <InternalsVisibleTo Include="Test" />
+    <InternalsVisibleTo Include="Senpai.Test" />
   </ItemGroup>
 
-  <Import Project="Senpai.Build.Props" />
-  <Import Project="Senpai.NuGet.Props" />
+  <Import Project="Properties\Build.props" />
+  <Import Project="Properties\NuGet.props" />
 
 </Project>

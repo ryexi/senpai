@@ -3,34 +3,29 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B4F61B39-BAB0-4476-A105-D8F57B15344D}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build Items", "Build Items", "{80691D64-5F1D-450E-99A4-3EA2A3431317}"
+	ProjectSection(SolutionItems) = preProject
+		.maidchan = .maidchan
+		Directory.Build.props = Directory.Build.props
+		pack.ps1 = pack.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E3D1F8BC-D092-426A-B732-671AAB24D8A6}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		.gitattributes = .gitattributes
 		.gitignore = .gitignore
 		CHANGELOG.md = CHANGELOG.md
-		NOTICE.txt = NOTICE.txt
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build Items", "Build Items", "{192244EB-FD41-4C9A-839E-09DFDAD35E4F}"
-	ProjectSection(SolutionItems) = preProject
-		.runsettings = .runsettings
-		build.jsonc = build.jsonc
-		build.ps1 = build.ps1
-		Directory.Build.props = Directory.Build.props
-	EndProjectSection
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Senpai", "src\Senpai\Senpai.csproj", "{9E1AF045-C973-4645-9005-E4854518DBF4}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Generic", "generic\Generic.shproj", "{88F1ECF2-2F9B-4840-A0C3-941B177A9375}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Senpai.Test", "src\Senpai.Test\Senpai.Test.csproj", "{718B0CB3-738C-4C33-9F6B-8E3757315F06}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "System.CommandLine", "src\System.CommandLine\System.CommandLine.csproj", "{1767628C-4BF4-42B7-965F-703A6FD05A60}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "System.CommandLine", "src\Senpai.CLI\src\System.CommandLine\System.CommandLine.csproj", "{8636EF7C-A7A8-4B46-9357-22C4A13F9C15}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample", "playground\Sample\Sample.csproj", "{63113F8C-9EFF-40BB-921F-A8C6E0DA8CB9}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Senpai", "src\Senpai\Senpai.csproj", "{EBF7C56D-3A9E-46E9-BC94-D4D9006A14B0}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Playground", "Playground", "{602D641D-19C7-4397-B48B-B41B037108B7}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Senpai.Test", "src\Senpai.Test\Senpai.Test.csproj", "{CE447A8C-E48C-4D48-8E80-5E4B756091E6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample", "sample\Sample.csproj", "{8248DBC7-769C-4378-8344-C0C0F7708A82}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,31 +33,27 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1767628C-4BF4-42B7-965F-703A6FD05A60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1767628C-4BF4-42B7-965F-703A6FD05A60}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1767628C-4BF4-42B7-965F-703A6FD05A60}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1767628C-4BF4-42B7-965F-703A6FD05A60}.Release|Any CPU.Build.0 = Release|Any CPU
-		{63113F8C-9EFF-40BB-921F-A8C6E0DA8CB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{63113F8C-9EFF-40BB-921F-A8C6E0DA8CB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{63113F8C-9EFF-40BB-921F-A8C6E0DA8CB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{63113F8C-9EFF-40BB-921F-A8C6E0DA8CB9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EBF7C56D-3A9E-46E9-BC94-D4D9006A14B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EBF7C56D-3A9E-46E9-BC94-D4D9006A14B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EBF7C56D-3A9E-46E9-BC94-D4D9006A14B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EBF7C56D-3A9E-46E9-BC94-D4D9006A14B0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CE447A8C-E48C-4D48-8E80-5E4B756091E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CE447A8C-E48C-4D48-8E80-5E4B756091E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CE447A8C-E48C-4D48-8E80-5E4B756091E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CE447A8C-E48C-4D48-8E80-5E4B756091E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E1AF045-C973-4645-9005-E4854518DBF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E1AF045-C973-4645-9005-E4854518DBF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E1AF045-C973-4645-9005-E4854518DBF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E1AF045-C973-4645-9005-E4854518DBF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{718B0CB3-738C-4C33-9F6B-8E3757315F06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{718B0CB3-738C-4C33-9F6B-8E3757315F06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{718B0CB3-738C-4C33-9F6B-8E3757315F06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{718B0CB3-738C-4C33-9F6B-8E3757315F06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8636EF7C-A7A8-4B46-9357-22C4A13F9C15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8636EF7C-A7A8-4B46-9357-22C4A13F9C15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8636EF7C-A7A8-4B46-9357-22C4A13F9C15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8636EF7C-A7A8-4B46-9357-22C4A13F9C15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8248DBC7-769C-4378-8344-C0C0F7708A82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8248DBC7-769C-4378-8344-C0C0F7708A82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8248DBC7-769C-4378-8344-C0C0F7708A82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8248DBC7-769C-4378-8344-C0C0F7708A82}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{88F1ECF2-2F9B-4840-A0C3-941B177A9375} = {192244EB-FD41-4C9A-839E-09DFDAD35E4F}
-		{63113F8C-9EFF-40BB-921F-A8C6E0DA8CB9} = {602D641D-19C7-4397-B48B-B41B037108B7}
-	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {0A6238DB-434C-422E-B3A3-0FA764033991}
+		SolutionGuid = {21D3B910-3024-4DA3-AF69-84DB8945029B}
 	EndGlobalSection
 EndGlobal

@@ -1,4 +1,5 @@
 ﻿using System.CommandLine;
+using System.Diagnostics;
 using Senpai.Properties;
 
 namespace Senpai
@@ -14,7 +15,7 @@ namespace Senpai
         /// Initialize and start the command-line interpreter.
         /// </summary>
         /// <param name="context">Configure the behavior of the interpreter.</param>
-        public static void Run(AppContext context)
+        public static int Run(AppContext context)
         {
             if (context is null)
                 throw new ArgumentNullException(nameof(context));
@@ -32,7 +33,54 @@ namespace Senpai
                 _root.Add(cmd);
             }
 
-            _ = _root.Invoke(context.Arguments!);
+            return _root.Invoke(context.Arguments!);
+        }
+
+        /// <summary>
+        /// Writes an error message to the standard output stream and terminates the application.
+        /// </summary>
+        /// <param name="value">The value to write.</param>
+        public static void WriteError(object? value) => WriteRawError($"Error: {value}");
+
+        /// <summary>
+        /// <see cref="Console.WriteLine(object?)"/>.
+        /// </summary>
+        /// <param name="value"></param>
+        public static void WriteLine(object? value) => WriteLine(value, Console.ForegroundColor);
+
+        /// <inheritdoc cref="WriteError(object?)"/>
+        public static void WriteRawError(object? value)
+        {
+            WriteLine(value, ConsoleColor.Red);
+            Terminate(-1);
+        }
+
+        /// <inheritdoc cref="WriteWarning(object?)"/>
+        public static void WriteRawWarning(object? value) => WriteLine(value, ConsoleColor.Yellow);
+
+        /// <summary>
+        /// Writes a warning message to the standard output stream.
+        /// </summary>
+        /// <param name="value">The value to write.</param>
+        public static void WriteWarning(object? value) => WriteRawWarning($"Warning: {value}");
+
+        /// <summary>
+        /// Kill the current process by calling <see cref="Process.GetCurrentProcess().Kill()"/>
+        /// </summary>
+        /// <param name="code">
+        /// The exit code of the process. The default value is 0 (zero), which indicates that the process completed successfully.
+        /// </param>
+        public static void Terminate(int code)
+        {
+            Environment.ExitCode = code;
+            Process.GetCurrentProcess().Kill();
+        }
+
+        private static void WriteLine(object? value, ConsoleColor color)
+        {
+            Console.ForegroundColor = color;
+            Console.WriteLine(value);
+            Console.ResetColor();
         }
     }
 }
