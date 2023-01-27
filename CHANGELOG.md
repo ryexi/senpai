@@ -17,7 +17,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
   - Added period (.) in the description of `--help` and `--version`.
 
  ### Fixed
-  - Properties with a default value will not be overriden anymore.
+  - Properties with a default value will not be overridden anymore.
 
 ## [3.0.0-alpha.2] - 2023-01-20
  ### Added
