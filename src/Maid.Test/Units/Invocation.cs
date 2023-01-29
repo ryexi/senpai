@@ -1,7 +1,7 @@
 ﻿namespace Maid.Test.Units;
 
 [TestClass]
-public class Invocation_Tests
+public class Invocation
 {
     [TestMethod]
     public void Thread_Should_Not_Block_Env_ExitCode()
