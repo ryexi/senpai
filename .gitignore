@@ -2,7 +2,7 @@
 .vs/
 .vscode/
 artifacts/
-.alfredobj/
+.maid/
 
 # Files
 *.csproj.user
