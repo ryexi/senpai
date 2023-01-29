@@ -1,4 +1,4 @@
-﻿namespace Senpai.Test.Units;
+﻿namespace Maid.Test.Units;
 
 [TestClass]
 public class Invocation_Tests

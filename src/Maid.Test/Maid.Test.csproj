@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Senpai\Maid.csproj" />
+    <ProjectReference Include="..\Maid\Maid.csproj" />
   </ItemGroup>
 
 </Project>

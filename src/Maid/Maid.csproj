@@ -11,7 +11,7 @@
 
   <ItemGroup>
 
-    <ProjectReference Include="..\Senpai.CLI\src\System.CommandLine\System.CommandLine.csproj">
+    <ProjectReference Include="..\Maid.CLI\src\System.CommandLine\System.CommandLine.csproj">
       <PrivateAssets>all</PrivateAssets>
     </ProjectReference>
     <PackageReference Include="Teronis.MSBuild.Packaging.ProjectBuildInPackage" Version="1.0.0">

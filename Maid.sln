@@ -25,7 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maid.Test", "src\Maid.Test\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "System.CommandLine", "src\Maid.CLI\src\System.CommandLine\System.CommandLine.csproj", "{8636EF7C-A7A8-4B46-9357-22C4A13F9C15}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample", "sample\Sample.csproj", "{8248DBC7-769C-4378-8344-C0C0F7708A82}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "playground", "playground", "{B268905E-0FF1-416F-8EEA-25082270D0B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,10 +45,6 @@ Global
 		{8636EF7C-A7A8-4B46-9357-22C4A13F9C15}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8636EF7C-A7A8-4B46-9357-22C4A13F9C15}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8636EF7C-A7A8-4B46-9357-22C4A13F9C15}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8248DBC7-769C-4378-8344-C0C0F7708A82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8248DBC7-769C-4378-8344-C0C0F7708A82}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8248DBC7-769C-4378-8344-C0C0F7708A82}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8248DBC7-769C-4378-8344-C0C0F7708A82}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
