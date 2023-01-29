@@ -5,7 +5,7 @@
     <PackageId>Maid</PackageId>
     <Authors>$(Company)</Authors>
     <PackageVersion>$(Version)</PackageVersion>
-    <Description>An a-okay command-line interpreter for .NET Consoles.</Description>
+    <Description>A command-line assistant that handles the command-line interpretation of your CLI applications.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <RepositoryUrl>https://github.com/imdying/maid</RepositoryUrl>
