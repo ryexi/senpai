@@ -1,4 +1,4 @@
-﻿namespace Senpai;
+﻿namespace Maid;
 
 /// <summary>
 /// Defines the arity of an option or argument.

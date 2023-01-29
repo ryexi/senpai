@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Senpai
+namespace Maid
 {
     /// <summary>
     /// Represents a context used by the interpreter.

@@ -1,4 +1,4 @@
-﻿namespace Senpai
+﻿namespace Maid
 {
     public interface ISymbol
     {

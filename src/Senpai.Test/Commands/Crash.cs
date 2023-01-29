@@ -1,4 +1,4 @@
-﻿namespace Senpai.Test.Commands;
+﻿namespace Maid.Test.Commands;
 
 public sealed class Crash : Command
 {

@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Senpai
+namespace Maid
 {
     internal interface SymbolProperty<T> where T : SymbolAttribute
     {

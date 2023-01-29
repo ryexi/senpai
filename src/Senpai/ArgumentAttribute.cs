@@ -1,4 +1,4 @@
-﻿namespace Senpai
+﻿namespace Maid
 {
     /// <summary>
     /// A symbol defining a value that can be passed on the command line to a <see cref="Command">command</see> or <see cref="Option">option</see>.

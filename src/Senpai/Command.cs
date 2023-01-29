@@ -1,7 +1,7 @@
-﻿using Senpai.Parsing;
-using Senpai.Properties;
+﻿using Maid.Parsing;
+using Maid.Properties;
 
-namespace Senpai;
+namespace Maid;
 
 /// <summary>
 /// Represents a specific action that the application performs.

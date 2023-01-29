@@ -1,4 +1,4 @@
-﻿namespace Senpai
+﻿namespace Maid
 {
     /// <summary>
     /// Represents an <see langword="argument"/>.

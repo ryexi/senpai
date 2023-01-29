@@ -1,6 +1,6 @@
 ﻿using System.CommandLine.Invocation;
 
-namespace Senpai.Invocation;
+namespace Maid.Invocation;
 
 internal sealed class CommandHandlerContext
 {

@@ -1,4 +1,4 @@
-﻿namespace Senpai;
+﻿namespace Maid;
 
 internal static class ArgumentArityExtensions
 {

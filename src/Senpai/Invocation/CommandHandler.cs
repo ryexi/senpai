@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Senpai.Invocation;
+namespace Maid.Invocation;
 
 internal sealed class CommandHandler
 {

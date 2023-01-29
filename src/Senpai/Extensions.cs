@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace Senpai;
+namespace Maid;
 
 internal static class Extensions
 {

@@ -2,14 +2,14 @@
 
   <PropertyGroup>
     
-    <PackageId>Senpai</PackageId>
+    <PackageId>Maid</PackageId>
     <Authors>$(Company)</Authors>
     <PackageVersion>$(Version)</PackageVersion>
     <Description>An a-okay command-line interpreter for .NET Consoles.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-    <RepositoryUrl>https://github.com/imdying/senpai</RepositoryUrl>
-    <PackageReleaseNotes>The changelog can be found at https://github.com/imdying/senpai/blob/main/CHANGELOG.md</PackageReleaseNotes>
+    <RepositoryUrl>https://github.com/imdying/maid</RepositoryUrl>
+    <PackageReleaseNotes>The changelog can be found at https://github.com/imdying/maid/blob/main/CHANGELOG.md</PackageReleaseNotes>
     <PackageTags>cmd;command;cli;console;terminal;shell;commandline;interpreter;processor;parser;handler;</PackageTags>
     <PackageReadmeFile>\README.md</PackageReadmeFile>
     

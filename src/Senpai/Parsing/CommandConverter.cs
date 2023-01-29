@@ -1,4 +1,4 @@
-﻿namespace Senpai.Parsing;
+﻿namespace Maid.Parsing;
 
 internal static class CommandConverter
 {

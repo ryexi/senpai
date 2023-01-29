@@ -1,6 +1,6 @@
 ﻿using System.CommandLine;
 
-namespace Senpai.Parsing;
+namespace Maid.Parsing;
 
 internal static class Argument<T> where T : SymbolAttribute
 {

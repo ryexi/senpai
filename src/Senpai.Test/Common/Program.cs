@@ -1,1 +1,1 @@
-﻿return App.Run(new(args));
+﻿return Cli.Run(new(args));

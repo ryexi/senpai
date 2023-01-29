@@ -5,8 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build Items", "Build Items", "{80691D64-5F1D-450E-99A4-3EA2A3431317}"
 	ProjectSection(SolutionItems) = preProject
-		.maidchan = .maidchan
 		Directory.Build.props = Directory.Build.props
+		.alfred = .alfred
 		pack.ps1 = pack.ps1
 	EndProjectSection
 EndProject
@@ -25,7 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Senpai.Test", "src\Senpai.T
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "System.CommandLine", "src\Senpai.CLI\src\System.CommandLine\System.CommandLine.csproj", "{8636EF7C-A7A8-4B46-9357-22C4A13F9C15}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample", "sample\Sample.csproj", "{8248DBC7-769C-4378-8344-C0C0F7708A82}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample", "sample\Sample.csproj", "{8248DBC7-769C-4378-8344-C0C0F7708A82}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

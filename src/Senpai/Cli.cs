@@ -1,13 +1,13 @@
 ﻿using System.CommandLine;
 using System.Diagnostics;
-using Senpai.Properties;
+using Maid.Properties;
 
-namespace Senpai
+namespace Maid
 {
     /// <summary>
-    /// Provides a command-line interpreter for CLI applications.
+    /// Provides a command-line interpreter for command-line interface applications.
     /// </summary>
-    public static class App
+    public static class Cli
     {
         private static RootCommand? _root;
 
@@ -34,6 +34,20 @@ namespace Senpai
             }
 
             return _root.Invoke(context.Arguments!);
+        }
+
+        public static void Interrupt() => Terminate(0);
+
+        /// <summary>
+        /// Kill the current process by calling <see cref="Process.GetCurrentProcess().Kill()"/>
+        /// </summary>
+        /// <param name="code">
+        /// The exit code of the process. The default value is 0 (zero), which indicates that the process completed successfully.
+        /// </param>
+        public static void Terminate(int code)
+        {
+            Environment.ExitCode = code;
+            Process.GetCurrentProcess().Kill();
         }
 
         /// <summary>
@@ -63,18 +77,6 @@ namespace Senpai
         /// </summary>
         /// <param name="value">The value to write.</param>
         public static void WriteWarning(object? value) => WriteRawWarning($"Warning: {value}");
-
-        /// <summary>
-        /// Kill the current process by calling <see cref="Process.GetCurrentProcess().Kill()"/>
-        /// </summary>
-        /// <param name="code">
-        /// The exit code of the process. The default value is 0 (zero), which indicates that the process completed successfully.
-        /// </param>
-        public static void Terminate(int code)
-        {
-            Environment.ExitCode = code;
-            Process.GetCurrentProcess().Kill();
-        }
 
         private static void WriteLine(object? value, ConsoleColor color)
         {

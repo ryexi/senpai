@@ -1,7 +1,7 @@
-﻿using Senpai.Invocation;
-using Senpai.Test.Commands;
+﻿using Maid.Invocation;
+using Maid.Test.Commands;
 
-namespace Senpai.Test.Units;
+namespace Maid.Test.Units;
 
 [TestClass]
 public class Class_Property_SetValue

@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Senpai.Parsing;
+namespace Maid.Parsing;
 
 internal sealed class OptionConverter
 {

@@ -1,7 +1,7 @@
 ﻿using System.CommandLine;
 using System.Reflection;
 
-namespace Senpai
+namespace Maid
 {
     internal sealed class ArgumentProperty : SymbolProperty<ArgumentAttribute>
     {

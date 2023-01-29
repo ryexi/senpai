@@ -1,4 +1,4 @@
-﻿namespace Senpai.Invocation;
+﻿namespace Maid.Invocation;
 
 /// <summary>
 /// Isolate and execute a <see cref="Command">command</see> on a thread.

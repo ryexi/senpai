@@ -4,9 +4,9 @@
     {
         protected override void Invocation(object?[] args)
         {
-            App.WriteWarning("Beep boop.");
-            App.WriteError("This command has thrown an error which stops everything and returns a '-1' exit code.");
-            App.WriteLine("Nani!!");
+            Cli.WriteWarning("Beep boop.");
+            Cli.WriteError("This command has thrown an error which stops everything and returns a '-1' exit code.");
+            Cli.WriteLine("Nani!!");
         }
     }
 }

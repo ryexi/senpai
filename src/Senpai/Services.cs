@@ -1,4 +1,4 @@
-﻿namespace Senpai
+﻿namespace Maid
 {
     /// <summary>
     /// Provides higher-level services (static methods) for common <see cref="Command"/> tasks.

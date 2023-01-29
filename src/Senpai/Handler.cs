@@ -1,7 +1,7 @@
 ﻿using System.CommandLine;
-using Senpai.Invocation;
+using Maid.Invocation;
 
-namespace Senpai;
+namespace Maid;
 
 internal static class Handler
 {

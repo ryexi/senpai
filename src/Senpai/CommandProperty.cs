@@ -1,6 +1,6 @@
-﻿using Senpai.Properties;
+﻿using Maid.Properties;
 
-namespace Senpai;
+namespace Maid;
 
 /// <summary>
 /// A symbol defining the parameters that can be passed to a <see cref="Command">command</see>.
