@@ -27,7 +27,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "System.CommandLine", "src\M
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "playground", "playground", "{B268905E-0FF1-416F-8EEA-25082270D0B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample", "playground\Sample\Sample.csproj", "{6D5AD8C4-3E89-47FC-B3A7-761135E4577B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample", "playground\Sample\Sample.csproj", "{6D5AD8C4-3E89-47FC-B3A7-761135E4577B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
