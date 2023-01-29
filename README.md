@@ -8,7 +8,8 @@
   
  ## Documentation
 
-  - [Wikipedia](https://github.com/imdying/maid/wiki/)
+  - [Wikipedia](https://github.com/imdying/maid/wiki/Maid)
+  - [System.CommandLine](https://github.com/imdying/maid/wiki/System.CommandLine)
 
  ## License
 

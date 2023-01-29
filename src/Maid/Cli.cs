@@ -36,7 +36,10 @@ namespace Maid
             return _root.Invoke(context.Arguments!);
         }
 
-        public static void Interrupt() => Terminate(0);
+        /// <summary>
+        /// Kill the process and return a non-zero exit code.
+        /// </summary>
+        public static void Interrupt() => Terminate(-1);
 
         /// <summary>
         /// Kill the current process by calling <see cref="Process.GetCurrentProcess().Kill()"/>
@@ -66,7 +69,7 @@ namespace Maid
         public static void WriteRawError(object? value)
         {
             WriteLine(value, ConsoleColor.Red);
-            Terminate(-1);
+            Interrupt();
         }
 
         /// <inheritdoc cref="WriteWarning(object?)"/>
