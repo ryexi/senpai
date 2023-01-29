@@ -19,11 +19,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maid", "src\Senpai\Maid.csproj", "{9E1AF045-C973-4645-9005-E4854518DBF4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maid", "src\Maid\Maid.csproj", "{9E1AF045-C973-4645-9005-E4854518DBF4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maid.Test", "src\Senpai.Test\Maid.Test.csproj", "{718B0CB3-738C-4C33-9F6B-8E3757315F06}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maid.Test", "src\Maid.Test\Maid.Test.csproj", "{718B0CB3-738C-4C33-9F6B-8E3757315F06}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "System.CommandLine", "src\Senpai.CLI\src\System.CommandLine\System.CommandLine.csproj", "{8636EF7C-A7A8-4B46-9357-22C4A13F9C15}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "System.CommandLine", "src\Maid.CLI\src\System.CommandLine\System.CommandLine.csproj", "{8636EF7C-A7A8-4B46-9357-22C4A13F9C15}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample", "sample\Sample.csproj", "{8248DBC7-769C-4378-8344-C0C0F7708A82}"
 EndProject
