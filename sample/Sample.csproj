@@ -10,7 +10,7 @@
 
   <ItemGroup>
     <!-- Switch to the nuget package. -->
-    <ProjectReference Include="..\src\Senpai\Senpai.csproj" />
+    <ProjectReference Include="..\src\Senpai\Maid.csproj" />
   </ItemGroup>
 
 </Project>
